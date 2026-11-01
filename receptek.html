@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Recept feltöltése</title>
+    <script src="./js/receptek.js"></script>
+  </head>
+  <body>
+    <form id="receptForm">
+      <input type="text" id="nev" placeholder="Recept neve" required />
+      <textarea id="megjegyzes" placeholder="Megjegyzés"></textarea>
+      <br />
+      <input
+        type="text"
+        id="alapanyag_kereso"
+        placeholder="Keresés az alapanyagok között..."
+      />
+
+      <button type="button" id="uj_alapanyag_gomb">
+        Új alapanyag hozzáadása
+      </button>
+      <select id="alapanyagok_select" placeholder="Alapanyag keresése">
+        <option value="">Válasszon alapanyagot</option>
+      </select>
+      <button type="button" id="alapanyag_hozzadasa">
+        Alapanyag hozzáadása
+      </button>
+      <table id="alapanyagok">
+        <thead>
+          <tr>
+            <td>Hozzávaló</td>
+            <td>Mennyiség</td>
+            <td>Egység</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+          </tr>
+        </tbody>
+      </table>
+      <input
+        type="number"
+        id="hany_gramm"
+        placeholder="Hány gramm lett belőle?"
+        step="1"
+        min="0"
+      />
+
+      <button type="submit">Mentés</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Étkezések és ételek kezelése</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./js/menuk.js"></script>
+    <script src="./js/receptek.js" defer></script>
+  </head>
+  <body
+    class="bg-slate-900 text-slate-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8"
+  >
+    <!-- Fő keret -->
+    <div class="max-w-5xl mx-auto space-y-8">
+      <!-- Étkezések felvitele szekció -->
+      <div
+        class="bg-white text-slate-800 rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8"
+      >
+        <!-- Fejléc -->
+        <div class="mb-6 border-b border-slate-100 pb-4">
+          <h1 class="text-2xl font-bold text-slate-900 tracking-tight">
+            Étkezések kezelése
+          </h1>
+          <p class="text-sm text-slate-500 mt-1">
+            Napi étkezések megtekintése és összeállítása.
+          </p>
+        </div>
+
+        <!-- Meglévő menük táblázata -->
+        <div
+          class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm mb-8"
+        >
+          <table id="menuk" class="w-full text-left border-collapse"></table>
+        </div>
+
+        <!-- Új menü felvitele űrlap -->
+        <div
+          id="menuForm"
+          class="space-y-6 bg-slate-50/70 p-5 rounded-xl border border-slate-100"
+        >
+          <h2
+            class="text-sm font-semibold text-slate-700 uppercase tracking-wider"
+          >
+            Új menü elem hozzáadása
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label
+                for="datum"
+                class="block text-sm font-medium text-slate-700 mb-1"
+                >Dátum:</label
+              >
+              <input
+                type="date"
+                id="datum"
+                name="datum"
+                class="w-full px-3.5 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white"
+              />
+            </div>
+            <div>
+              <label
+                for="idopont"
+                class="block text-sm font-medium text-slate-700 mb-1"
+                >Időpont:</label
+              >
+              <input
+                type="time"
+                id="idopont"
+                name="idopont"
+                class="w-full px-3.5 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white"
+              />
+            </div>
+            <div>
+              <label
+                for="etkezes"
+                class="block text-sm font-medium text-slate-700 mb-1"
+                >Étkezés:</label
+              >
+              <select
+                id="etkezes"
+                name="etkezes"
+                class="w-full px-3.5 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white"
+              >
+                <option value="REGGELI">Reggeli</option>
+                <option value="TIZORAI">Tízórai</option>
+                <option value="EBED">Ebéd</option>
+                <option value="UZSONNA">Uzsonna</option>
+                <option value="VACSORA">Vacsora</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Fogások táblázat az űrlapon belül -->
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-2"
+              >Fogások:</label
+            >
+            <div class="overflow-x-auto">
+              <table id="fogasok" class="w-full border-collapse">
+                <thead>
+                  <tr
+                    class="text-xs text-slate-500 uppercase tracking-wider text-left"
+                  >
+                    <th class="pb-2">Fogás</th>
+                    <th class="pb-2">Mennyiség</th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="divide-y divide-slate-100 text-sm text-slate-700"
+                  id="fogasok_lista"
+                >
+                  <!-- Fogások listája ide kerül -->
+                </tbody>
+                <tbody id="fogas_bevitel">
+                  <tr>
+                    <td>
+                      <input
+                        type="text"
+                        id="fogas_kereso"
+                        placeholder="Keresés..."
+                        class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white flex-1"
+                      />
+                      <select
+                        id="fogas"
+                        class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white flex-1"
+                      >
+                        <option value="">Válasszon...</option>
+                      </select>
+                      <button
+                        type="button"
+                        id="uj_fogas_gomb"
+                        class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-medium rounded-lg transition whitespace-nowrap"
+                      >
+                        Hozzáadás
+                      </button>
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        name="mennyiseg"
+                        min="0"
+                        step="0.1"
+                        placeholder="Mennyiség"
+                        class="w-24 px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"
+                      />
+                      <select
+                        name="egyseg"
+                        id="fogas_egyseg"
+                        class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"
+                      >
+                        <option value="g">g</option>
+                        <option value="ml">ml</option>
+                      </select>
+                      <button
+                        type="button"
+                        id="fogas_hozzaadasa"
+                        class="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition whitespace-nowrap"
+                      >
+                        Fogas Mentése
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              id="menu_mentese"
+              class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm shadow-md transition active:scale-98 cursor-pointer"
+            >
+              Mentés
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Új étel feltöltése szekció (A már meglévő szép formád) -->
+      <div
+        id="fogas-form"
+        class="bg-white text-slate-800 rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8"
+      >
+        <!-- Fejléc -->
+        <div class="mb-8 border-b border-slate-100 pb-4">
+          <h1 class="text-2xl font-bold text-slate-900 tracking-tight">
+            Új étel feltöltése
+          </h1>
+          <p class="text-sm text-slate-500 mt-1">
+            Add meg az étel adatait és a hozzávalókat a listához.
+          </p>
+        </div>
+
+        <div id="receptForm" class="space-y-6">
+          <!-- Étel Neve -->
+          <div>
+            <label
+              for="nev"
+              class="block text-sm font-medium text-slate-700 mb-1"
+              >Étel neve</label
+            >
+            <input
+              type="text"
+              id="nev"
+              placeholder="Pl. Házi márványtorta"
+              required
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition text-sm bg-slate-50/50"
+            />
+          </div>
+
+          <!-- Megjegyzés -->
+          <div>
+            <label
+              for="megjegyzes"
+              class="block text-sm font-medium text-slate-700 mb-1"
+              >Megjegyzés / Leírás</label
+            >
+            <textarea
+              id="megjegyzes"
+              rows="3"
+              placeholder="Rövid leírás vagy tippek az elkészítéshez..."
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition text-sm bg-slate-50/50 resize-none"
+            ></textarea>
+          </div>
+
+          <div class="border-t border-slate-100 my-4"></div>
+
+          <!-- Alapanyagkezelő Szekció -->
+          <div
+            class="bg-slate-50/70 p-4 rounded-xl border border-slate-100 space-y-4"
+          >
+            <h2
+              class="text-sm font-semibold text-slate-700 uppercase tracking-wider"
+            >
+              Hozzávalók kezelése
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input
+                type="text"
+                id="alapanyag_kereso"
+                placeholder="🔍 Keresés az alapanyagok között..."
+                class="w-full px-3.5 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white"
+              />
+              <button
+                type="button"
+                id="uj_alapanyag_gomb"
+                class="w-full px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium rounded-lg text-sm transition shadow-sm active:scale-98 cursor-pointer"
+              >
+                + Új alapanyag hozzáadása
+              </button>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2">
+              <select
+                id="alapanyagok_select"
+                class="flex-1 px-3.5 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white"
+              >
+                <option value="">Válasszon alapanyagot</option>
+              </select>
+              <button
+                type="button"
+                id="alapanyag_hozzadasa"
+                class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg text-sm transition shadow-sm active:scale-98 cursor-pointer"
+              >
+                Hozzáadás
+              </button>
+            </div>
+          </div>
+
+          <!-- Hozzávalók Táblázat -->
+          <div
+            class="overflow-hidden rounded-xl border border-slate-200 shadow-sm"
+          >
+            <table id="alapanyagok" class="w-full text-left border-collapse">
+              <thead>
+                <tr
+                  class="bg-slate-100 text-slate-600 text-xs font-semibold uppercase tracking-wider border-b border-slate-200"
+                >
+                  <th class="py-3 px-4">Hozzávaló</th>
+                  <th class="py-3 px-4">Mennyiség</th>
+                  <th class="py-3 px-4">Egység</th>
+                </tr>
+              </thead>
+              <tbody
+                class="divide-y divide-slate-100 text-sm text-slate-700"
+              ></tbody>
+            </table>
+          </div>
+
+          <!-- Végsúly -->
+          <div>
+            <label
+              for="hany_gramm"
+              class="block text-sm font-medium text-slate-700 mb-1"
+              >Hány gramm lett belőle?</label
+            >
+            <input
+              type="number"
+              id="hany_gramm"
+              placeholder="Pl. 1200"
+              step="1"
+              min="0"
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition text-sm bg-slate-50/50" required
+            />
+          </div>
+
+          <!-- Mentés Gomb -->
+          <div class="pt-4">
+            <button
+              type="button"
+              id="recept_mentese"
+              class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-base shadow-lg shadow-emerald-600/20 transition active:scale-98 cursor-pointer"
+            >
+              Étel mentése
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const menuTabla = document.getElementById("menuk");
+      const url = "https://node-naplo.onrender.com/api/data/menuk";
+      let min_date = new Date("2025-10-16").toISOString().split("T")[0];
+      const max_date = new Date().toISOString().split("T")[0];
+      if (menuTabla) {
+        let menukListaja = await fetch(
+          url + "?min-date=" + min_date + "&max-date=" + max_date,
+          { method: "GET" },
+        ).then((response) => response.json());
+
+        console.log(menukListaja);
+        if (Array.isArray(menukListaja)) {
+          for (let i = 0; menukListaja.length > i; i++ ){
+          let thead_ = `<thead>
+  <tr class="bg-slate-900 text-white"><th colspan="5"
+                  class="py-3 px-4 text-center font-semibold text-base" 
+                  data-field="datum" 
+                  data-date="${menukListaja[i]["datum"]}">📅 ${menukListaja[i]["datum"]}
+                </th>
+              </tr>
+              <tr
+                class="bg-slate-100 text-slate-600 text-xs font-semibold uppercase tracking-wider border-b border-slate-200"
+              >
+                <th class="py-3 px-4" data-field="etkezes">Étkezés</th>
+                <th class="py-3 px-4" data-field="ido">Időpont</th>
+                <th class="py-3 px-4" data-field="fogasok" colspan="2">
+                  Fogások
+                </th>
+                <th class="py-3 px-4" data-field="mennyiseg">Mennyiség</th>
+              </tr>
+              </thead>
+            `;
+          let tbody_ = generateTbody(datum, menukListaja[i]);
+          document.getElementById("menuk").innerHTML += thead_ + tbody_;
+        }}
+      }
+
+      console.log(max_date);
+      let menu_dates = {};
+      let i = 0;
+    });
+    function generate(recept_osszetevok) {
+      console.log(recept_osszetevok);
+      if (
+        Array.isArray(recept_osszetevok["recept"]) &&
+        recept_osszetevok["recept"].length > 0
+      ) {
+        let res_ = "";
+        recept_osszetevok["recept"].forEach((element) => {
+          console.log(element);
+          console.log(element);
+          if (
+            Array.isArray(element["alapanyagok"]) &&
+            element["alapanyagok"].length > 0
+          ) {
+            for (let i = 0; element["alapanyagok"].length > i; i++) {
+              alapanyag_ = element["alapanyagok"][i];
+              res_ +=
+                alapanyag_["alapanyag"]["nev"] +
+                " " +
+                alapanyag_["mennyiseg"] +
+                " " +
+                alapanyag_["egyseg"] +
+                "<br>";
+            }
+          }
+        });
+        return res_;
+      }
+      return "";
+    }
+    function generateTbody(datum, aznapi_menu) {
+      let value_ = "";
+      for (let i = 1; aznapi_menu["receptek"].length > i; i++) {
+        value_ += `
+              <tr class="hover:bg-slate-50 transition">
+                <td class="py-3 px-4" data-field="fogasok">${aznapi_menu["receptek"][i]["nev"]}</td>
+                <td class="py-3 px-4" data-field="osszetevok">${generate(aznapi_menu["receptek"][i])}</td>
+                <td
+                  class="py-3 px-4 font-semibold text-emerald-600"
+                  data-field="mennyiseg"
+                >
+                  ${aznapi_menu["receptek"][i]["mennyiseg"]} ${aznapi_menu["receptek"][i]["egyseg"]} 
+                </td>
+              </tr>`;
+      }
+
+      let return_val =
+        aznapi_menu["receptek"].length > 0
+          ? `<tbody class="divide-y divide-slate-100 text-sm text-slate-700">
+              <tr class="hover:bg-slate-50 transition" data-field="reggeli">
+                <td
+                  class="py-3 px-4 font-medium text-slate-900"
+                  data-field="etkezes"
+                  rowspan="${aznapi_menu["receptek"].length}"
+                >
+                  ${aznapi_menu["etkezes"]}
+                </td>
+                <td
+                  class="py-3 px-4 text-slate-500"
+                  data-field="ido"
+                  rowspan="${aznapi_menu["receptek"].length}"
+                >
+                  ${aznapi_menu["idopont"]}
+                </td>
+                <td class="py-3 px-4" data-field="fogasok">${aznapi_menu["receptek"][0]["recept"][0]["nev"]}</td>
+                <td class="py-3 px-4" data-field="osszetevok">${generate(aznapi_menu["receptek"][0])}</td>
+                <td
+                  class="py-3 px-4 font-semibold text-emerald-600"
+                  data-field="mennyiseg"
+                >
+                  ${aznapi_menu["receptek"][0]["mennyiseg"]} ${aznapi_menu["receptek"][0]["egyseg"]} 
+                </td>
+              </tr>
+              ${value_}
+              
+            </tbody>`
+          : "";
+      return return_val;
+    }
+  </script>
+</html>
