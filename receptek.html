@@ -6,7 +6,35 @@
   <body>
     <form id="receptForm">
       <input type="text" id="nev" placeholder="Recept neve" required />
-      <textarea id="megjegyzes" placeholder="Megjegyzés"></textarea>
+      <br />
+      <input
+        type="text"
+        id="kategoria_kereso"
+        placeholder="Keresés az kategoriák között..."
+      />
+
+      <button type="button" id="uj_kategoria_gomb">
+        Új kategoria hozzáadása
+      </button>
+      <select id="kategoriak_select" placeholder="Kategória keresése">
+        <option value="">Válasszon kategoriát</option>
+      </select>
+      <button type="button" id="kategoria_hozzadasa">
+        Kategória hozzáadása
+      </button>
+      <table id="kategoriak">
+        <thead>
+          <tr>
+            <td>Kategóriák</td>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+          </tr>
+        </tbody>
+      </table>      
       <br />
       <input
         type="text"
@@ -27,8 +55,10 @@
         <thead>
           <tr>
             <td>Hozzávaló</td>
+        <!-- 
             <td>Mennyiség</td>
             <td>Egység</td>
+          -->
           </tr>
         </thead>
         <tbody>
@@ -37,14 +67,12 @@
           </tr>
         </tbody>
       </table>
-      <input
-        type="number"
-        id="hany_gramm"
-        placeholder="Hány gramm lett belőle?"
-        step="1"
-        min="0"
-      />
-
+      <label for="recept_forrasa">Recept forrása:</label>
+      <input type="text" id="recept_forrasa" placeholder="Recept forrása" />
+      <label for="recept_link">Recept linkje:</label>
+      <input type="text" id="recept_link" placeholder="Recept linkje" />
+      <label for="recept">Recept leírása:</label>
+      <textarea id="recept" placeholder="Recept leírása"></textarea>
       <button type="submit">Mentés</button>
     </form>
   </body>

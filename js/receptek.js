@@ -3,13 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
   const ujAlapanyagGomb = document.getElementById("uj_alapanyag_gomb");
   const alapanyagHozzadasa = document.getElementById("alapanyag_hozzadasa");
+  const kategoriaHozzadasa = document.getElementById("kategoria_hozzadasa");
   const alapanyagKereso = document.getElementById("alapanyag_kereso");
   const alapanyagSelect = document.getElementById("alapanyagok_select");
-  const tbody = document.querySelector("#alapanyagok tbody");
+  const kategoriaKereso = document.getElementById("kategoria_kereso");
+  const kategoriaSelect = document.getElementById("kategoriak_select");
+  const alapanyagTbody = document.querySelector("#alapanyagok alapanyagTbody");
+  const kategoriaTbody = document.querySelector("#kategoriak kategoriaTbody");
   const url = "https://node-receptek.onrender.com/data/receptek";
   const alapanyagokUrl = "https://node-receptek.onrender.com/data/alapanyag";
-  const fogasSelect = document.getElementById("fogas");
-  const menuMenteseGomb = document.getElementById("menu_mentese");
+  const kategoriakUrl = "https://node-receptek.onrender.com/data/kategoriak";
   const receptMenteseGomb = document.getElementById("recept_mentese");
   const menuForm = document.getElementById("menuForm");
 
@@ -30,8 +33,72 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Hiba az alapanyagok lekérésekor:", error);
       });
   }
-  if (ujAlapanyagGomb && alapanyagKereso && alapanyagSelect) {
-    ujAlapanyagGomb.addEventListener("click", () => {
+    if (kategoriaSelect) {
+    fetch(kategoriakUrl)
+      .then((response) => response.json())
+      .then((kategoriak) => {
+        if (Array.isArray(kategoriak)) {
+          kategoriak.forEach((kategoria) => {
+            const option = document.createElement("option");
+            option.value = kategoria.kod;
+            option.textContent = kategoria.nev;
+            kategoriaSelect.appendChild(option);
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Hiba az kategoriák lekérésekor:", error);
+      });
+  }
+  if (ujAlapanyagGomb && alapanyagKereso && alapanyagSelect && ujKategoriaGomb && kategoriaKereso && kategoriaSelect) {
+    ujKategoriaGomb.addEventListener("click", () => {
+      const ujKategoriaNev = kategoriaKereso.value.trim();
+      if (!ujKategoriaNev) {
+        return;
+      }
+
+      const ujOption = document.createElement("option");
+      ujOption.value = ujKategoriaNev
+        .toLowerCase()
+        .trim()
+        .slice(0, 4)
+        .trim()
+        .replace(/\s+/g, "_");
+      ujOption.textContent = ujKategoriaNev;
+      ujOption.selected = true;
+      kategoriaSelect.appendChild(ujOption);
+
+      Array.from(kategoriaSelect.options).forEach((opcio) => {
+        opcio.style.display = "block";
+      });
+    });
+
+    if (kategoriaHozzadasa && kategoriaSelect && kategoriaTbody) {
+      kategoriaHozzadasa.addEventListener("click", () => {
+        const selectedOption = kategoriaSelect.selectedOptions[0];
+        if (!selectedOption || !selectedOption.value) {
+          return;
+        }
+
+        const existingRow = Array.from(kategoriaTbody.querySelectorAll("tr")).find(
+          (row) => row.dataset.kod === selectedOption.value,
+        );
+
+        if (existingRow) {
+          return;
+        }
+
+        const tr = document.createElement("tr");
+        tr.dataset.kod = selectedOption.value;
+        tr.dataset.nev = selectedOption.textContent.trim();
+
+        const nevCell = document.createElement("td");
+        nevCell.textContent = selectedOption.textContent.trim();
+
+        tr.appendChild(nevCell);
+        kategoriaTbody.appendChild(tr);
+      });
+      ujAlapanyagGomb.addEventListener("click", () => {
       const ujAlapanyagNev = alapanyagKereso.value.trim();
       if (!ujAlapanyagNev) {
         return;
@@ -53,14 +120,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    if (alapanyagHozzadasa && alapanyagSelect && tbody) {
+    if (alapanyagHozzadasa && alapanyagSelect && alapanyagTbody) {
       alapanyagHozzadasa.addEventListener("click", () => {
         const selectedOption = alapanyagSelect.selectedOptions[0];
         if (!selectedOption || !selectedOption.value) {
           return;
         }
 
-        const existingRow = Array.from(tbody.querySelectorAll("tr")).find(
+        const existingRow = Array.from(alapanyagTbody.querySelectorAll("tr")).find(
           (row) => row.dataset.kod === selectedOption.value,
         );
 
@@ -75,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const nevCell = document.createElement("td");
         nevCell.textContent = selectedOption.textContent.trim();
 
+        /*
         const mennyisegCell = document.createElement("td");
         const mennyisegInput = document.createElement("input");
         mennyisegInput.type = "number";
@@ -97,12 +165,14 @@ document.addEventListener("DOMContentLoaded", () => {
           egysegInput.appendChild(option);
         });
         egysegCell.appendChild(egysegInput);
+        */
 
         tr.appendChild(nevCell);
-        tr.appendChild(mennyisegCell);
-        tr.appendChild(egysegCell);
-        tbody.appendChild(tr);
+        // tr.appendChild(mennyisegCell);
+        // tr.appendChild(egysegCell);
+        alapanyagTbody.appendChild(tr);
       });
+    }
     }
 
     if (receptForm) {
@@ -111,19 +181,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const adat = {
           nev: document.getElementById("nev")?.value || "",
-          alapanyagok: Array.from(tbody?.querySelectorAll("tr") || []).map(
+          kategoriak: Array.from(kategoriaTbody?.querySelectorAll("tr") || []).map(
             (row) => ({
               kod: row.dataset.kod || "",
               nev:
                 row.dataset.nev ||
                 row.querySelector("td")?.textContent?.trim() ||
                 "",
-              mennyiseg: parseFloat(row.querySelector("input")?.value) || 0,
-              egyseg: row.querySelector("select")?.value || "",
             }),
           ),
-          megjegyzes: document.getElementById("megjegyzes")?.value || "",
-          hany_gramm: parseFloat(document.getElementById("hany_gramm")) || 0,
+          alapanyagok: Array.from(alapanyagTbody?.querySelectorAll("tr") || []).map(
+            (row) => ({
+              kod: row.dataset.kod || "",
+              nev:
+                row.dataset.nev ||
+                row.querySelector("td")?.textContent?.trim() ||
+                "",
+            }),
+          ),
+          recept: document.getElementById("recept")?.value || "",
+          forrasa: document.getElementById("recept_forrasa")?.value || "",
+          link: document.getElementById("recept_link")?.value || "",
+          
         };
         try {
           const response = await fetch(url, {
@@ -137,38 +216,14 @@ document.addEventListener("DOMContentLoaded", () => {
           const eredmeny = await response.json();
           console.log("Szerver válasza:", eredmeny);
           if (eredmeny.message == "Data received successfully") {
-            const ujFogasNev = receptForm.querySelector("#nev")?.value || "";
-            const ujFogasKod = ujFogasNev
-              .toLowerCase()
-              .trim()
-              .slice(0, 4)
-              .trim()
-              .replace(/\s+/g, "_");
-            const ujOption = document.createElement("option");
-            ujOption.value = ujFogasKod;
-            ujOption.textContent = ujFogasNev;
-            ujOption.selected = true;
-            if (fogasSelect) {
-              fogasSelect.appendChild(ujOption);
-            }
-            receptForm
-              .querySelectorAll("input[type='text']")
-              .forEach((input) => {
-                input.value = "";
-              });
-            receptForm.querySelector("textarea").value = "";
-            receptForm
-              .querySelectorAll("input[type='number']")
-              .forEach((input) => {
-                input.value = 0;
-              });
-            tbody.innerHTML = "";
-            if (menuForm) {
-              menuForm.scrollIntoView({ behavior: "smooth", block: "start" });
-            }      
+            alert("Sikeres mentés!");
+          } else {
+            alert("Sikertelen mentés!");
           }
+          alert("Sikertelen mentés!");
         } catch (error) {
           console.error("Hiba a küldés során:", error);
+          alert("Hiba történt a mentés során. Kérlek próbáld újra!");
         }
       });
     }
