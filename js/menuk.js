@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const menuForm = document.getElementById("menuForm");
-  const url = "https://node-receptek.onrender.com/api/data/menuk";
-  const receptekUrl = "https://node-receptek.onrender.com/api/data/receptek";
+  const url = "https://node-receptek.onrender.com/data/menuk";
+  const receptekUrl = "https://node-receptek.onrender.com/data/receptek";
   let receptekSelector = {};
   const ujFogasGomb = document.getElementById("uj_fogas_gomb");
   const fogasKereso = document.getElementById("fogas_kereso");

@@ -391,7 +391,7 @@
     }
     document.addEventListener("DOMContentLoaded", async () => {
       const menuTabla = document.getElementById("menuk");
-      const url = "https://node-receptek.onrender.com/api/data/menuk";
+      const url = "https://node-receptek.onrender.com/data/menuk";
       let min_date = new Date("2025-10-16").toISOString().split("T")[0];
       const max_date = new Date().toISOString().split("T")[0];
       if (menuTabla) {
@@ -565,7 +565,7 @@
   
   
   async function fogas_torles(etkezes, kod, mennyiseg, egyseg) {
-    const url = 'https://node-receptek.onrender.com/api/data/menuk/del/';
+    const url = 'https://node-receptek.onrender.com/data/menuk/del/';
     const formData = {'etkezes': etkezes, 'kod': kod, 'mennyiseg': mennyiseg, 'egyseg': egyseg};
     let del_ = await fetch(url, { method: "POST", body: JSON.stringify(formData),
           headers: {
