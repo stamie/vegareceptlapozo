@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nev: document.getElementById("nev").value,
      
     };
-    const url = "https://node-naplo.onrender.com/data/alapanyagok";
+    const url = "https://node-receptek.onrender.com/data/alapanyagok";
     try {
       const response = await fetch(url, {
         method: "POST",

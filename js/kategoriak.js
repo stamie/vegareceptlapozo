@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nev: document.getElementById("nev").value,
      
     };
-    const url = "https://node-naplo.onrender.com/data/kategoriak";
+    const url = "https://node-receptek.onrender.com/data/kategoriak";
     try {
       const response = await fetch(url, {
         method: "POST",
