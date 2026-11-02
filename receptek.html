@@ -1,7 +1,9 @@
 <html>
   <head>
     <title>Recept feltöltése</title>
+    <script src="./js/kategoriak.js"></script>
     <script src="./js/receptek.js"></script>
+    <script src="./js/alapanyag.js"></script>
   </head>
   <body>
     <form id="receptForm">
@@ -30,9 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            
-          </tr>
+          
         </tbody>
       </table>      
       <br />
@@ -62,9 +62,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            
-          </tr>
+          
         </tbody>
       </table>
       <label for="recept_forrasa">Recept forrása:</label>
@@ -73,7 +71,7 @@
       <input type="text" id="recept_link" placeholder="Recept linkje" />
       <label for="recept">Recept leírása:</label>
       <textarea id="recept" placeholder="Recept leírása"></textarea>
-      <button type="submit">Mentés</button>
+      <button type="button" id="recept_mentese">Mentés</button>
     </form>
   </body>
 </html>
