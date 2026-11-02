@@ -19,6 +19,27 @@ document.addEventListener("DOMContentLoaded", () => {
   szuroKategoria.addEventListener("change", filterRecipes);
   szuroAlapanyag.addEventListener("change", filterRecipes);
   let receptek = [];
+  let kategoriak = [];
+  let alapanyagok = [];
+  fetch("https://node-receptek.onrender.com/data/kategoriak")
+    .then(response => response.json())
+    .then(data => {
+      kategoriak = data;
+      // Itt feltöltheted a kategória szűrőt a lekért adatokkal
+      szuroKategoria.innerHTML = `<option value="">Összes kategória</option>` + 
+        kategoriak.map(k => `<option value="${k.kod}">${k.nev}</option>`).join('');
+    } )
+    .catch(error => console.error("Hiba a kategóriák betöltésekor:", error));
+
+  fetch("https://node-receptek.onrender.com/data/alapanyagok")
+    .then(response => response.json())
+    .then(data => {
+      alapanyagok = data;
+      // Itt feltöltheted az alapanyag szűrőt a lekért adatokkal
+      szuroAlapanyag.innerHTML = `<option value="">Összes alapanyag</option>` + 
+        alapanyagok.map(a => `<option value="${a.kod}">${a.nev}</option>`).join('');
+    })
+    .catch(error => console.error("Hiba az alapanyagok betöltésekor:", error));
 
 
   // Fetch a https://onrender.com/receptek url-ről, majd a JSON feldolgozása
@@ -39,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const filteredRecipes = receptek.filter(recipe => {
       const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
-      const matchesKategoria = katVal === "" || recipe.kategoriak.includes(katVal);
-      const matchesAlapanyag = alapVal === "" || recipe.alapanyagok.includes(alapVal);
+      const matchesKategoria = katVal === "" || recipe.kategoriak.some(k => k.kod === katVal);
+      const matchesAlapanyag = alapVal === "" || recipe.alapanyagok.some(a => a.kod === alapVal);
 
       return matchesNev && matchesKategoria && matchesAlapanyag;
     });
