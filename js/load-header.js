@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
      //.then((response) => response.text())
      .then((html) => {
         console.log("Fejléc betöltve:", html);
-       //headerContainer.innerHTML = html;
+        headerContainer.innerHTML = html;
      })
      .catch((error) => {
        console.error("Hiba a fejléc betöltésekor:", error);
