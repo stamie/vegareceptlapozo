@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("https://node-receptek.onrender.com/data/kategoriak")
     .then(response => response.json())
     .then(data => {
-      kategoriak = data;
+      kategoriak = data.data;
       // Itt feltöltheted a kategória szűrőt a lekért adatokkal
       szuroKategoria.innerHTML = `<option value="">Összes kategória</option>` + 
         kategoriak.map(k => `<option value="${k.kod}">${k.nev}</option>`).join('');
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("https://node-receptek.onrender.com/data/alapanyagok")
     .then(response => response.json())
     .then(data => {
-      alapanyagok = data;
+      alapanyagok = data.data;
       // Itt feltöltheted az alapanyag szűrőt a lekért adatokkal
       szuroAlapanyag.innerHTML = `<option value="">Összes alapanyag</option>` + 
         alapanyagok.map(a => `<option value="${a.kod}">${a.nev}</option>`).join('');
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("https://node-receptek.onrender.com/data/receptek")
     .then(response => response.json())
     .then(data => {
-      receptek = data;
+      receptek = data.data;
       renderRecipes(receptek); // Kezdeti renderelés
     })
     .catch(error => console.error("Hiba a receptek betöltésekor:", error));
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ${recipe.kategoriak.map(k => `<span class="tag tag-category">${k.nev}</span>`).join('')}
         ${recipe.alapanyagok.map(a => `<span class="tag">${a.nev}</span>`).join('')}
       `;
-      modalSource.innerHTML = recipe.forras ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forras}</a>` : recipe.forras}` : '';
+      modalSource.innerHTML = recipe.forrasa ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}` : '';
       modalDescription.textContent = recipe.recept || "Nincs leírás.";
       modal.classList.add("active");
     }

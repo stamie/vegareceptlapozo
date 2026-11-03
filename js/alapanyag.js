@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         nev: document.getElementById("alapanyag_kereso").value.trim(),
       };
       const url = "https://node-receptek.onrender.com/data/alapanyagok";
+      const alapanyagSelect = document.getElementById("alapanyagok_select");
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -19,9 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const eredmeny = await response.json();
-        console.log("Szerver válasza:", eredmeny);
+        console.log("Szerver válasza:", eredmeny);/*
+        if (eredmeny.message === "Data received successfully") {
+          // Alapanyag sikeresen hozzáadva
+          const ujOption = document.createElement("option");
+          ujOption.value = adat.kod;
+          ujOption.textContent = adat.nev;
+          alapanyagSelect.appendChild(ujOption);
+        }*/
       } catch (error) {
-        console.error("Hiba a küldés során:", error);
+        //console.error("Hiba a küldés során:");
+        console.log(error);
       }
     });
   }
