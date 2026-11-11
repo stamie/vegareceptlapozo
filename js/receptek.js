@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             alert("Sikertelen mentés!");
           }
-          alert("Sikertelen mentés!");
+          
         } catch (error) {
           console.error("Hiba a küldés során:", error);
           alert("Hiba történt a mentés során. Kérlek próbáld újra!");
