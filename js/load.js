@@ -2,24 +2,31 @@ async function pendingNode() {
   while (1 == 1) {
     try {
       const userToken = localStorage.getItem("token");
-      const eredmeny = await fetch("https://node-receptek.onrender.com",{
-    headers: {
+    let header = {
       method: "GET",
       "Content-Type": "application/json",
       Authorization: `Bearer ${userToken}`,
-    },
+    };
+    if (!userToken) { 
+      header = {
+        method: "GET",
+        "Content-Type": "application/json",
+      };
+    }
+      const eredmeny = await fetch("https://node-receptek.onrender.com",{
+    headers: header,
   }
 
       ).then(
         (response) => response.json(),
       );
       if (eredmeny.message == "Hello, World!") {
-        return true;
+        return { ready: true };
       }
       window.location.reload();
     } catch (error) {
       console.log(error);
-      return false;
+      return { ready: false };
     }
   }
 }
