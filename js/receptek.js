@@ -226,10 +226,12 @@ document.addEventListener("DOMContentLoaded", () => {
           link: document.getElementById("recept_link")?.value || "",
         };
         try {
+          const token = localStorage.getItem('token');
           const response = await fetch(url, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(adat),
           });
