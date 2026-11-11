@@ -9,13 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const password = document.getElementById("password").value;
 
       try {
-        const response = await fetch("https://node-receptek.onrender.com/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const response = await fetch(
+          "https://node-receptek.onrender.com/api/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
           },
-          body: JSON.stringify({ email, password }),
-        });
+        );
 
         const data = await response.json();
 
@@ -23,9 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
           // Sikeres bejelentkezés esetén elmentheted a tokent (pl. localStorage-ba)
           if (data.token) {
             localStorage.setItem("token", data.token);
+
+            alert("Sikeres bejelentkezés!");
+            window.location.href = "./kereso.html"; // Átirányítás a kereső oldalra[cite: 1]
           }
-          alert("Sikeres bejelentkezés!");
-          window.location.href = "./kereso.html"; // Átirányítás a kereső oldalra[cite: 1]
         } else {
           alert(data.message || "Hibás bejelentkezési adatok!");
         }
