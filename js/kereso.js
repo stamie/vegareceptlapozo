@@ -22,35 +22,52 @@ document.addEventListener("DOMContentLoaded", () => {
   let kategoriak = [];
   let alapanyagok = [];
   fetch("https://node-receptek.onrender.com/data/kategoriak")
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       kategoriak = data.data;
       // Itt feltöltheted a kategória szűrőt a lekért adatokkal
-      szuroKategoria.innerHTML = `<option value="">Összes kategória</option>` + 
-        kategoriak.map(k => `<option value="${k.kod}">${k.nev}</option>`).join('');
-    } )
-    .catch(error => console.error("Hiba a kategóriák betöltésekor:", error));
+      szuroKategoria.innerHTML =
+        `<option value="">Összes kategória</option>` +
+        kategoriak
+          .map((k) => `<option value="${k.kod}">${k.nev}</option>`)
+          .join("");
+    })
+    .catch((error) => console.error("Hiba a kategóriák betöltésekor:", error));
 
   fetch("https://node-receptek.onrender.com/data/alapanyagok")
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       alapanyagok = data.data;
       // Itt feltöltheted az alapanyag szűrőt a lekért adatokkal
-      szuroAlapanyag.innerHTML = `<option value="">Összes alapanyag</option>` + 
-        alapanyagok.map(a => `<option value="${a.kod}">${a.nev}</option>`).join('');
+      szuroAlapanyag.innerHTML =
+        `<option value="">Összes alapanyag</option>` +
+        alapanyagok
+          .map((a) => `<option value="${a.kod}">${a.nev}</option>`)
+          .join("");
     })
-    .catch(error => console.error("Hiba az alapanyagok betöltésekor:", error));
+    .catch((error) =>
+      console.error("Hiba az alapanyagok betöltésekor:", error),
+    );
 
-
+  userToken = localStorage.getItem("token");
   // Fetch a https://onrender.com/receptek url-ről, majd a JSON feldolgozása
-  fetch("https://node-receptek.onrender.com/data/receptek")
-    .then(response => response.json())
-    .then(data => {
+  fetch("https://node-receptek.onrender.com/data/receptek", {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
       receptek = data.data;
+      user = data.user;
+
+      if (user) {
+        document.getElementsByClassName("main-nav")[0].innerHTML += '<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe">+ Új Recept</a>';
+      } 
       renderRecipes(receptek); // Kezdeti renderelés
     })
-    .catch(error => console.error("Hiba a receptek betöltésekor:", error));
-  
+    .catch((error) => console.error("Hiba a receptek betöltésekor:", error));
+
   function filterRecipes() {
     const nevVal = keresoNev.value.toLowerCase();
     const katVal = szuroKategoria.value;
@@ -58,17 +75,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Itt szűrheted a lekért tömbödet
     // Render függvény meghívása a megszűrt adatokra...
 
-    const filteredRecipes = receptek.filter(recipe => {
+    const filteredRecipes = receptek.filter((recipe) => {
       const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
-      const matchesKategoria = katVal === "" || recipe.kategoriak.some(k => k.kod === katVal);
-      const matchesAlapanyag = alapVal === "" || recipe.alapanyagok.some(a => a.kod === alapVal);
+      const matchesKategoria =
+        katVal === "" || recipe.kategoriak.some((k) => k.kod === katVal);
+      const matchesAlapanyag =
+        alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
 
       return matchesNev && matchesKategoria && matchesAlapanyag;
     });
 
     renderRecipes(filteredRecipes);
-
-  
   }
 
   // Kártya megjelenítő függvény (példa)
@@ -80,18 +97,18 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    recipes.forEach(recipe => {
+    recipes.forEach((recipe) => {
       const card = document.createElement("div");
-      
+
       card.className = "recipe-card";
       card.innerHTML = `
         <div class="recipe-body">
           <h3 class="recipe-title">${recipe.nev}</h3>
           <div class="tags">
-            ${recipe.kategoriak.map(k => `<span class="tag tag-category">${k.nev}</span>`).join('')}
-            ${recipe.alapanyagok.map(a => `<span class="tag">${a.nev}</span>`).join('')}
+            ${recipe.kategoriak.map((k) => `<span class="tag tag-category">${k.nev}</span>`).join("")}
+            ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
           </div>
-          ${recipe.forras ? `<div class="recipe-source">Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forras}</a>` : recipe.forras}</div>` : ''}
+          ${recipe.forras ? `<div class="recipe-source">Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forras}</a>` : recipe.forras}</div>` : ""}
           <button class="btn-view" onclick="openModal('${recipe._id}')">Recept megtekintése</button>
         </div>
       `;
@@ -99,14 +116,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   openModal = (recipeId) => {
-    const recipe = receptek.find(r => r._id === recipeId);
+    const recipe = receptek.find((r) => r._id === recipeId);
     if (recipe) {
       modalTitle.textContent = recipe.nev;
       modalTags.innerHTML = `
-        ${recipe.kategoriak.map(k => `<span class="tag tag-category">${k.nev}</span>`).join('')}
-        ${recipe.alapanyagok.map(a => `<span class="tag">${a.nev}</span>`).join('')}
+        ${recipe.kategoriak.map((k) => `<span class="tag tag-category">${k.nev}</span>`).join("")}
+        ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
       `;
-      modalSource.innerHTML = recipe.forrasa ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}` : '';
+      modalSource.innerHTML = recipe.forrasa
+        ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}`
+        : "";
       modalDescription.textContent = recipe.recept || "Nincs leírás.";
       modal.classList.add("active");
     }

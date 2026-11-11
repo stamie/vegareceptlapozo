@@ -1,86 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Receptek Keresése</title>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/style-1.css">
-  <link rel="stylesheet" href="./css/style-2.css">
-  <link rel="stylesheet" href="./css/style-3.css">
-  
-  <!-- JavaScript fájlok -->
-  <script src="./js/kategoriak.js"></script>
-  <script src="./js/receptek.js"></script>
-  <script src="./js/alapanyag.js"></script>
-  <script src="./js/load-header3.js"></script>
-  <script src="./js/kereso.js" defer></script>
-  
-</head>
-<body>
- 
-  <div class="container">
-    <!-- Fejléc -->
-     <div id="header-container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receptek Keresése</title>
 
- </div>
-    <div class="header">
-      <h1>Receptek Keresése</h1>
-      <a href="./feltoltes.html" class="btn-new-recipe">+ Új Recept Feltöltése</a>
-    </div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style-1.css" />
+    <link rel="stylesheet" href="./css/style-2.css" />
+    <link rel="stylesheet" href="./css/style-3.css" />
 
-    <!-- Szűrők -->
-    <div class="search-card">
-      <div class="search-row">
-        <!-- Recept név keresés -->
-        <div class="form-group">
-          <label for="kereso_nev">Keresés név alapján</label>
-          <input type="text" id="kereso_nev" placeholder="Pl.: Gyümölcsös piskóta..." />
+    <!-- JavaScript fájlok -->
+    <script src="./js/load.js"></script>
+    <script src="./js/kategoriak.js"></script>
+    <script src="./js/receptek.js"></script>
+    <script src="./js/alapanyag.js"></script>
+    <script src="./js/load-header3.js"></script>
+    <script src="./js/kereso.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Fejléc -->
+      <div id="header-container"></div>
+      <div class="header">
+        <h1>Receptek Keresése</h1>
+        <a href="./feltoltes.html" class="btn-new-recipe"
+          >+ Új Recept Feltöltése</a
+        >
+      </div>
+
+      <!-- Szűrők -->
+      <div class="search-card">
+        <div class="search-row">
+          <!-- Recept név keresés -->
+          <div class="form-group">
+            <label for="kereso_nev">Keresés név alapján</label>
+            <input
+              type="text"
+              id="kereso_nev"
+              placeholder="Pl.: Gyümölcsös piskóta..."
+            />
+          </div>
+
+          <!-- Kategória szűrő -->
+          <div class="form-group">
+            <label for="szuro_kategoria">Kategória</label>
+            <select id="szuro_kategoria">
+              <option value="">Összes kategória</option>
+            </select>
+          </div>
+
+          <!-- Alapanyag szűrő -->
+          <div class="form-group">
+            <label for="szuro_alapanyag">Alapanyag</label>
+            <select id="szuro_alapanyag">
+              <option value="">Összes alapanyag</option>
+            </select>
+          </div>
         </div>
+      </div>
 
-        <!-- Kategória szűrő -->
-        <div class="form-group">
-          <label for="szuro_kategoria">Kategória</label>
-          <select id="szuro_kategoria">
-            <option value="">Összes kategória</option>
-          </select>
-        </div>
-
-        <!-- Alapanyag szűrő -->
-        <div class="form-group">
-          <label for="szuro_alapanyag">Alapanyag</label>
-          <select id="szuro_alapanyag">
-            <option value="">Összes alapanyag</option>
-          </select>
-        </div>
+      <!-- Recept Lista / Grid -->
+      <div id="receptek_lista" class="recipes-grid">
+        <!-- Ide töltődnek be a kártyák dinamikusan JS segítségével -->
       </div>
     </div>
 
-    <!-- Recept Lista / Grid -->
-    <div id="receptek_lista" class="recipes-grid">
-      <!-- Ide töltődnek be a kártyák dinamikusan JS segítségével -->
-    </div>
-  </div>
-
-  <!-- Recept Részletek Modal (Pop-up) -->
-  <div id="receptModal" class="modal-overlay">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 id="modalTitle"></h2>
-        <button class="btn-close" id="modalClose">&times;</button>
+    <!-- Recept Részletek Modal (Pop-up) -->
+    <div id="receptModal" class="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modalTitle"></h2>
+          <button class="btn-close" id="modalClose">&times;</button>
+        </div>
+        <div class="tags" id="modalTags"></div>
+        <p id="modalSource" class="recipe-source"></p>
+        <hr
+          style="
+            margin-bottom: 16px;
+            border: 0;
+            border-top: 1px solid var(--border-color);
+          "
+        />
+        <h4>Elkészítés:</h4>
+        <p
+          id="modalDescription"
+          style="white-space: pre-line; line-height: 1.6; margin-top: 8px"
+        ></p>
       </div>
-      <div class="tags" id="modalTags"></div>
-      <p id="modalSource" class="recipe-source"></p>
-      <hr style="margin-bottom: 16px; border: 0; border-top: 1px solid var(--border-color);">
-      <h4>Elkészítés:</h4>
-      <p id="modalDescription" style="white-space: pre-line; line-height: 1.6; margin-top: 8px;"></p>
     </div>
-  </div>
-
-</body>
+  </body>
 </html>
