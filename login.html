@@ -13,11 +13,15 @@
   <link rel="stylesheet" href="./css/login.css">
   <script src="./js/load.js"></script>
     <script>
-      pendingNode().then((isNodeReady) => {
+      pendingNode().then(async (isNodeReady) => {
         if (isNodeReady) {
           // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
           console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
-          loadScript("./js/login.js");
+          try {
+            await import("./js/login.js");
+          } catch (error) {
+            console.error("Hiba történt a modul betöltése közben:", error);
+          }
         } else {
           console.error("A Node.js szerver nem elérhető.");
         }

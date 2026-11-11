@@ -14,15 +14,19 @@
   <!-- JavaScript fájlok -->
   <script src="./js/load.js"></script>
     <script>
-      pendingNode().then((isNodeReady) => {
+      pendingNode().then(async (isNodeReady) => {
         if (isNodeReady) {
           // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
           console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
-          loadScript("./js/kategoriak.js");
-          loadScript("./js/receptek.js");
-          loadScript("./js/alapanyag.js");
-          loadScript("./js/load-header.js");
-          loadScript("./js/kereso.js");
+          try {
+            await import("./js/kategoriak.js");
+            await import("./js/receptek.js");
+            await import("./js/alapanyag.js");
+            await import("./js/load-header.js");
+            await import("./js/kereso.js");
+          } catch (error) {
+            console.error("Hiba történt a modulok betöltése közben:", error);
+          }
         } else {
           console.error("A Node.js szerver nem elérhető.");
         }
