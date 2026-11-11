@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const eredmeny = await response.json();
           console.log("Szerver válasza:", eredmeny);
-          if (eredmeny.message == "Data received successfully") {
+          if (eredmeny.success == false) {
             alert("Sikeres mentés!");
           } else {
             alert("Sikertelen mentés!");
