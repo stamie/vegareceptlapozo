@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok) {
           // Sikeres bejelentkezés esetén elmentheted a tokent (pl. localStorage-ba)
           if (data.token) {
-            localStorage.setItem("userToken", data.token);
+            localStorage.setItem("token", data.token);
           }
           alert("Sikeres bejelentkezés!");
           window.location.href = "./kereso.html"; // Átirányítás a kereső oldalra[cite: 1]
