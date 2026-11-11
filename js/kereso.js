@@ -53,6 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch a https://onrender.com/receptek url-ről, majd a JSON feldolgozása
   fetch("https://node-receptek.onrender.com/data/receptek", {
     headers: {
+      method: "GET",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${userToken}`,
     },
   })
