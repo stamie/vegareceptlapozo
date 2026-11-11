@@ -12,7 +12,17 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/login.css">
   <script src="./js/load.js"></script>
-  <script src="./js/login.js"></script>
+    <script>
+      pendingNode().then((isNodeReady) => {
+        if (isNodeReady) {
+          // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
+          console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
+          loadScript("./js/login.js");
+        } else {
+          console.error("A Node.js szerver nem elérhető.");
+        }
+      });
+    </script>
 
 </head>
 <body>

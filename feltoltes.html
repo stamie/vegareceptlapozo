@@ -1,122 +1,163 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recept feltöltése</title>
-  
-  <!-- Modern betűtípus és ikonok (Google Fonts) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recept feltöltése</title>
 
-  <!-- Eredeti JS fájlok -->
-  <script src="./js/kategoriak.js"></script>
-  <script src="./js/receptek.js"></script>
-  <script src="./js/alapanyag.js"></script>
-  <script src="./js/load.js"></script>
+    <!-- Modern betűtípus és ikonok (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
 
-</head>
-<body>
+    <!-- Eredeti JS fájlok -->
 
-  <div class="container">
-    <h1>Új Recept Feltöltése</h1>
+    <script src="./js/load.js"></script>
+    <script>
+      pendingNode().then((isNodeReady) => {
+        if (isNodeReady) {
+          // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
+          console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
+          loadScript("./js/kategoriak.js");
+          loadScript("./js/receptek.js");
+          loadScript("./js/alapanyag.js");
+        } else {
+          console.error("A Node.js szerver nem elérhető.");
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Új Recept Feltöltése</h1>
 
-    <form id="receptForm">
-      <!-- Recept neve -->
-      <div class="form-group">
-        <label for="nev">Recept neve</label>
-        <input type="text" id="nev" placeholder="Pl.: Gyümölcsös piskóta" required />
-      </div>
-
-      <!-- Kategóriák kártya -->
-      <div class="section-card">
-        <div class="section-title">Kategóriák</div>
-        
+      <form id="receptForm">
+        <!-- Recept neve -->
         <div class="form-group">
-          <input type="text" id="kategoria_kereso" placeholder="Keresés a kategóriák között..." />
+          <label for="nev">Recept neve</label>
+          <input
+            type="text"
+            id="nev"
+            placeholder="Pl.: Gyümölcsös piskóta"
+            required
+          />
         </div>
 
-        <div class="btn-group">
-          <button type="button" id="uj_kategoria_gomb" class="btn-secondary">+ Új kategória</button>
+        <!-- Kategóriák kártya -->
+        <div class="section-card">
+          <div class="section-title">Kategóriák</div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              id="kategoria_kereso"
+              placeholder="Keresés a kategóriák között..."
+            />
+          </div>
+
+          <div class="btn-group">
+            <button type="button" id="uj_kategoria_gomb" class="btn-secondary">
+              + Új kategória
+            </button>
+          </div>
+
+          <div class="form-group">
+            <select id="kategoriak_select">
+              <option value="">Válasszon kategóriát</option>
+            </select>
+          </div>
+
+          <button type="button" id="kategoria_hozzadasa" class="btn-secondary">
+            Kategória hozzáadása
+          </button>
+
+          <table id="kategoriak">
+            <thead>
+              <tr>
+                <td>Kategóriák</td>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dinamikus kategória sorok -->
+            </tbody>
+          </table>
         </div>
 
+        <!-- Alapanyagok kártya -->
+        <div class="section-card">
+          <div class="section-title">Hozzávalók</div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              id="alapanyag_kereso"
+              placeholder="Keresés az alapanyagok között..."
+            />
+          </div>
+
+          <div class="btn-group">
+            <button type="button" id="uj_alapanyag_gomb" class="btn-secondary">
+              + Új alapanyag
+            </button>
+          </div>
+
+          <div class="form-group">
+            <select id="alapanyagok_select">
+              <option value="">Válasszon alapanyagot</option>
+            </select>
+          </div>
+
+          <button type="button" id="alapanyag_hozzadasa" class="btn-secondary">
+            Hozzávaló hozzáadása
+          </button>
+
+          <table id="alapanyagok">
+            <thead>
+              <tr>
+                <td>Hozzávaló</td>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dinamikus alapanyag sorok -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Forrás és Link mezők egy sorban -->
+        <div class="row">
+          <div class="form-group">
+            <label for="recept_forrasa">Recept forrása</label>
+            <input
+              type="text"
+              id="recept_forrasa"
+              placeholder="Pl.: Nagymama receptkönyve"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="recept_link">Recept linkje</label>
+            <input type="text" id="recept_link" placeholder="https://..." />
+          </div>
+        </div>
+
+        <!-- Recept leírása -->
         <div class="form-group">
-          <select id="kategoriak_select">
-            <option value="">Válasszon kategóriát</option>
-          </select>
+          <label for="recept">Recept elkészítése / leírása</label>
+          <textarea
+            id="recept"
+            placeholder="Írd le az elkészítés lépéseit..."
+          ></textarea>
         </div>
 
-        <button type="button" id="kategoria_hozzadasa" class="btn-secondary">Kategória hozzáadása</button>
-
-        <table id="kategoriak">
-          <thead>
-            <tr>
-              <td>Kategóriák</td>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Dinamikus kategória sorok -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Alapanyagok kártya -->
-      <div class="section-card">
-        <div class="section-title">Hozzávalók</div>
-        
-        <div class="form-group">
-          <input type="text" id="alapanyag_kereso" placeholder="Keresés az alapanyagok között..." />
-        </div>
-
-        <div class="btn-group">
-          <button type="button" id="uj_alapanyag_gomb" class="btn-secondary">+ Új alapanyag</button>
-        </div>
-
-        <div class="form-group">
-          <select id="alapanyagok_select">
-            <option value="">Válasszon alapanyagot</option>
-          </select>
-        </div>
-
-        <button type="button" id="alapanyag_hozzadasa" class="btn-secondary">Hozzávaló hozzáadása</button>
-
-        <table id="alapanyagok">
-          <thead>
-            <tr>
-              <td>Hozzávaló</td>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Dinamikus alapanyag sorok -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Forrás és Link mezők egy sorban -->
-      <div class="row">
-        <div class="form-group">
-          <label for="recept_forrasa">Recept forrása</label>
-          <input type="text" id="recept_forrasa" placeholder="Pl.: Nagymama receptkönyve" />
-        </div>
-
-        <div class="form-group">
-          <label for="recept_link">Recept linkje</label>
-          <input type="text" id="recept_link" placeholder="https://..." />
-        </div>
-      </div>
-
-      <!-- Recept leírása -->
-      <div class="form-group">
-        <label for="recept">Recept elkészítése / leírása</label>
-        <textarea id="recept" placeholder="Írd le az elkészítés lépéseit..."></textarea>
-      </div>
-
-      <!-- Mentés gomb -->
-      <button type="button" id="recept_mentese" class="btn-submit">Recept Mentése</button>
-    </form>
-  </div>
-
-</body>
+        <!-- Mentés gomb -->
+        <button type="button" id="recept_mentese" class="btn-submit">
+          Recept Mentése
+        </button>
+      </form>
+    </div>
+  </body>
 </html>

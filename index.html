@@ -16,12 +16,21 @@
   
   <!-- JavaScript fájlok -->
   <script src="./js/load.js"></script>
-  <script src="./js/kategoriak.js"></script>
-  <script src="./js/receptek.js"></script>
-  <script src="./js/alapanyag.js"></script>
-  <script src="./js/load-header.js"></script>
-  <script src="./js/kereso.js" defer></script>
-  
+    <script>
+      pendingNode().then((isNodeReady) => {
+        if (isNodeReady) {
+          // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
+          console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
+          loadScript("./js/kategoriak.js");
+          loadScript("./js/receptek.js");
+          loadScript("./js/alapanyag.js");
+          loadScript("./js/load-header.js");
+          loadScript("./js/kereso.js");
+        } else {
+          console.error("A Node.js szerver nem elérhető.");
+        }
+      });
+    </script>
 </head>
 <body>
  
