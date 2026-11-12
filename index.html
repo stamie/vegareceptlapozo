@@ -84,41 +84,34 @@
     <!-- JavaScript fájlok -->
     <script type="module">
       document.addEventListener("DOMContentLoaded", async () => {
-        let load = await import("./js/load.js").default(() => {
-          console.log("load.js betöltve.");
-        }
+    try {
+      // 1. Dinamikusan betöltjük a modult
+      const module = await import("./js/load.js");
+      
+      // 2. Kinyerjük a default exportot (ami a pendingNode függvényünk)
+      const pendingNode = module.default;
+      
+      console.log("load.js sikeresen betöltve.");
 
-        ).catch((error) => {
-          console.error("Hiba történt a load.js betöltése közben:", error);
-        });
-        document.addEventListener("DOMContentLoaded", () => {
-          load.default().then(async (isNodeReady) => {
-            console.log("Node.js szerver elérhetősége:", isNodeReady);
-            if (isNodeReady.ready) {
-              // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
-              console.log(
-                "A Node.js szerver elérhető. Folytatjuk a feltöltést.",
-              );
-              let kategoriaModul = await import("./js/kategoriak.js");
-                kategoriaModul.default(); // Meghívjuk a loadKategoriak függvényt
-                
-              try {
-                await import("./js/receptek.js");
-                await import("./js/alapanyag.js");
-                await import("./js/load-header.js");
-                await import("./js/kereso.js");
-              } catch (error) {
-                console.error(
-                  "Hiba történt a modulok betöltése közben:",
-                  error,
-                );
-              }
-            } else {
-              console.error("A Node.js szerver nem elérhető.");
-            }
-          });
-        });
-      });
+      // 3. Meghívhatjuk a függvényt
+      const isNodeReady = await pendingNode();
+      
+      if (isNodeReady.ready) {
+        console.log("A szerver elérhető!");
+        const kategoriaJs = await import("./js/kategoriak.js");
+        kategoriaJs.default; // Meghívjuk a default exportált függvényt
+        const alapanyagJs = await import("./js/alapanyag.js");
+        alapanyagJs.default; // Meghívjuk a default exportált függvényt
+        const receptJs = await import("./js/receptek.js");
+        receptJs.default; // Meghívjuk a default exportált függvényt
+      } else {
+        console.log("A szerver nem válaszol.");
+      }
+      
+    } catch (error) {
+      console.error("Hiba történt a betöltés során:", error);
+    }
+  });
     </script>
   </body>
 </html>
