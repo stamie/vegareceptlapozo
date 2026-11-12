@@ -1,3 +1,4 @@
+async function loadKategoriak() {
 document.addEventListener("DOMContentLoaded", () => {
   const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
   if (ujKategoriaGomb) {
@@ -35,3 +36,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+}
+export default loadKategoriak;
