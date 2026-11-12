@@ -98,13 +98,8 @@
       
       if (isNodeReady.ready) {
         console.log("A szerver elérhető!");
-        const kategoriaJs = await import("./js/kategoriak.js");
-        await kategoriaJs.loadKategoriak(); // Meghívjuk a default exportált függvényt
-        //loadKategoriak(); // Meghívjuk a kategória opciók betöltését
-        const alapanyagJs = await import("./js/alapanyag.js");
-        //alapanyagJs.default(); // Meghívjuk a default exportált függvényt
-        const receptJs = await import("./js/receptek.js");
-        await receptJs.loadReceptek(); // Meghívjuk a default exportált függvényt
+        const keresoJs = await import("./js/kereso.js");
+        await keresoJs.loadKereso(); // Meghívjuk a default exportált függvényt
       } else {
         console.log("A szerver nem válaszol.");
       }

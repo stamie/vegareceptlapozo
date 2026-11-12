@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+async function loadKereso() {
+  console.log("loadKereso() called");
   const keresoNev = document.getElementById("kereso_nev");
   const szuroKategoria = document.getElementById("szuro_kategoria");
   const szuroAlapanyag = document.getElementById("szuro_alapanyag");
@@ -132,4 +133,5 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.classList.add("active");
     }
   };
-});
+}
+export { loadKereso };
