@@ -51,13 +51,16 @@ async function loadKereso() {
     );
 
   userToken = localStorage.getItem("token");
+  let header = {
+    "Content-Type": "application/json",
+  };
+  if (userToken) {
+    header["Authorization"] = `Bearer ${userToken}`;
+  }
   // Fetch a https://onrender.com/receptek url-ről, majd a JSON feldolgozása
   fetch("https://node-receptek.onrender.com/data/receptek", {
-    headers: {
       method: "GET",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${userToken}`,
-    },
+      headers: header,
   })
     .then((response) => response.json())
     .then((data) => {
