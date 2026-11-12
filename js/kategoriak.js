@@ -37,4 +37,4 @@ async function loadKategoriak() {
   }
 }
 export default loadKategoriak;
-loadKategoriak();
+

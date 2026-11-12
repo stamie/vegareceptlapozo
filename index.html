@@ -93,9 +93,10 @@
               console.log(
                 "A Node.js szerver elérhető. Folytatjuk a feltöltést.",
               );
-              try {
-                let kategoriaModul = await import("./js/kategoriak.js");
+              let kategoriaModul = await import("./js/kategoriak.js");
                 kategoriaModul.default(); // Meghívjuk a loadKategoriak függvényt
+                
+              try {
                 await import("./js/receptek.js");
                 await import("./js/alapanyag.js");
                 await import("./js/load-header.js");
