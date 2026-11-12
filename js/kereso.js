@@ -50,7 +50,7 @@ async function loadKereso() {
       console.error("Hiba az alapanyagok betöltésekor:", error),
     );
 
-  userToken = localStorage.getItem("token");
+  let userToken = localStorage.getItem("token");
   let header = {
     "Content-Type": "application/json",
   };
