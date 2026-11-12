@@ -100,6 +100,7 @@
         console.log("A szerver elérhető!");
         const kategoriaJs = await import("./js/kategoriak.js");
         kategoriaJs.default; // Meghívjuk a default exportált függvényt
+        await loadKategoriak(); // Meghívjuk a kategória opciók betöltését
         const alapanyagJs = await import("./js/alapanyag.js");
         alapanyagJs.default; // Meghívjuk a default exportált függvényt
         const receptJs = await import("./js/receptek.js");
