@@ -1,4 +1,5 @@
 async function loadReceptek() {
+  console.log("loadReceptek() called");
 const receptForm = document.getElementById("receptForm");
   const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
   const ujAlapanyagGomb = document.getElementById("uj_alapanyag_gomb");
