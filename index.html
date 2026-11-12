@@ -104,7 +104,7 @@
         const alapanyagJs = await import("./js/alapanyag.js");
         //alapanyagJs.default(); // Meghívjuk a default exportált függvényt
         const receptJs = await import("./js/receptek.js");
-        //receptJs.default(); // Meghívjuk a default exportált függvényt
+        await receptJs.loadReceptek(); // Meghívjuk a default exportált függvényt
       } else {
         console.log("A szerver nem válaszol.");
       }

@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const receptForm = document.getElementById("receptForm");
+async function loadReceptek() {
+const receptForm = document.getElementById("receptForm");
   const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
   const ujAlapanyagGomb = document.getElementById("uj_alapanyag_gomb");
   const alapanyagHozzadasa = document.getElementById("alapanyag_hozzadasa");
@@ -265,4 +265,5 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
-});
+}
+export { loadReceptek };
