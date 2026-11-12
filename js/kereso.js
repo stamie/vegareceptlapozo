@@ -75,21 +75,21 @@ async function loadKereso() {
     .catch((error) => console.error("Hiba a receptek betöltésekor:", error));
 
 
-  openModal = (recipeId) => {
-    const recipe = receptek.find((r) => r._id === recipeId);
-    if (recipe) {
-      modalTitle.textContent = recipe.nev;
-      modalTags.innerHTML = `
+let openModal = (recipeId) => {
+  const recipe = receptek.find((r) => r._id === recipeId);
+  if (recipe) {
+    modalTitle.textContent = recipe.nev;
+    modalTags.innerHTML = `
         ${recipe.kategoriak.map((k) => `<span class="tag tag-category">${k.nev}</span>`).join("")}
         ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
       `;
-      modalSource.innerHTML = recipe.forrasa
-        ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}`
-        : "";
-      modalDescription.textContent = recipe.recept || "Nincs leírás.";
-      modal.classList.add("active");
-    }
-  };
+    modalSource.innerHTML = recipe.forrasa
+      ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}`
+      : "";
+    modalDescription.textContent = recipe.recept || "Nincs leírás.";
+    modal.classList.add("active");
+  }
+};
 }
 function filterRecipes() {
   const nevVal = keresoNev.value.toLowerCase();
