@@ -19,8 +19,9 @@
 
     <!-- JavaScript fájlok -->
     <script type="module">
-      import pendingNode from "./js/load.js";
-      pendingNode().then(async (isNodeReady) => {
+    import pendingNode from "./js/load.js";
+    document.addEventListener("DOMContentLoaded", () => {
+        pendingNode().then(async (isNodeReady) => {
         console.log("Node.js szerver elérhetősége:", isNodeReady);
         if (isNodeReady.ready) {
           // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
@@ -40,6 +41,7 @@
           console.error("A Node.js szerver nem elérhető.");
         }
       });
+    });
     </script>
   </head>
   <body>
