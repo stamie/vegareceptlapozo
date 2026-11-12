@@ -84,8 +84,7 @@
     <!-- JavaScript fájlok -->
     <script type="module">
       document.addEventListener("DOMContentLoaded", async () => {
-        let load = await import("./js/load.js")
-        .default(() => {
+        let load = await import("./js/load.js").default(() => {
           console.log("load.js betöltve.");
         }
 
