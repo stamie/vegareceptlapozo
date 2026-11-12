@@ -29,7 +29,6 @@
           try {
             let kategoriaModul = await import("./js/kategoriak.js");
             kategoriaModul.default(); // Meghívjuk a loadKategoriak függvényt
-          
             await import("./js/receptek.js");
             await import("./js/alapanyag.js");
             await import("./js/load-header.js");
