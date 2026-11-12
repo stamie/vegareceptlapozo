@@ -5,17 +5,13 @@ async function pendingNode() {
     console.log("User token:", userToken);
     
       let header = {
-        method: "GET",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
+       "Content-Type": "application/json",
       };
-      if (!userToken) {
-        header = {
-          method: "GET",
-          "Content-Type": "application/json",
-        };
+      if (userToken) {
+        header["Authorization"] = `Bearer ${userToken}`;
       }
       const eredmeny = await fetch("https://node-receptek.onrender.com", {
+        method: "GET",
         headers: header,
       }).then((response) => response.json());
       if (eredmeny.message == "Hello, World!") {
