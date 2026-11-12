@@ -3,7 +3,7 @@ async function pendingNode() {
   try {
     const userToken = localStorage.getItem("token");
     console.log("User token:", userToken);
-    if (!userToken) {
+    
       let header = {
         method: "GET",
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ async function pendingNode() {
       } else {
         return { ready: false };
       }
-    }
+    
   } catch (error) {
     console.log(error);
     return { ready: false };
