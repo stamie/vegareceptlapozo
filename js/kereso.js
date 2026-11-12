@@ -59,8 +59,8 @@ async function loadKereso() {
   }
   // Fetch a https://onrender.com/receptek url-ről, majd a JSON feldolgozása
   fetch("https://node-receptek.onrender.com/data/receptek", {
-      method: "GET",
-      headers: header,
+    method: "GET",
+    headers: header,
   })
     .then((response) => response.json())
     .then((data) => {
@@ -69,58 +69,12 @@ async function loadKereso() {
 
       if (user) {
         document.getElementsByClassName("main-nav")[0].innerHTML += '<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe">+ Új Recept</a>';
-      } 
+      }
       renderRecipes(receptek); // Kezdeti renderelés
     })
     .catch((error) => console.error("Hiba a receptek betöltésekor:", error));
 
-  function filterRecipes() {
-    const nevVal = keresoNev.value.toLowerCase();
-    const katVal = szuroKategoria.value;
-    const alapVal = szuroAlapanyag.value;
-    // Itt szűrheted a lekért tömbödet
-    // Render függvény meghívása a megszűrt adatokra...
 
-    const filteredRecipes = receptek.filter((recipe) => {
-      const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
-      const matchesKategoria =
-        katVal === "" || recipe.kategoriak.some((k) => k.kod === katVal);
-      const matchesAlapanyag =
-        alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
-
-      return matchesNev && matchesKategoria && matchesAlapanyag;
-    });
-
-    renderRecipes(filteredRecipes);
-  }
-
-  // Kártya megjelenítő függvény (példa)
-  function renderRecipes(recipes) {
-    receptekLista.innerHTML = "";
-
-    if (recipes.length === 0) {
-      receptekLista.innerHTML = `<div class="no-results">Nincs a keresésnek megfelelő recept.</div>`;
-      return;
-    }
-
-    recipes.forEach((recipe) => {
-      const card = document.createElement("div");
-
-      card.className = "recipe-card";
-      card.innerHTML = `
-        <div class="recipe-body">
-          <h3 class="recipe-title">${recipe.nev}</h3>
-          <div class="tags">
-            ${recipe.kategoriak.map((k) => `<span class="tag tag-category">${k.nev}</span>`).join("")}
-            ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
-          </div>
-          ${recipe.forras ? `<div class="recipe-source">Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forras}</a>` : recipe.forras}</div>` : ""}
-          <button class="btn-view" onclick="openModal('${recipe._id}')">Recept megtekintése</button>
-        </div>
-      `;
-      receptekLista.appendChild(card);
-    });
-  }
   openModal = (recipeId) => {
     const recipe = receptek.find((r) => r._id === recipeId);
     if (recipe) {
@@ -136,5 +90,52 @@ async function loadKereso() {
       modal.classList.add("active");
     }
   };
+}
+function filterRecipes() {
+  const nevVal = keresoNev.value.toLowerCase();
+  const katVal = szuroKategoria.value;
+  const alapVal = szuroAlapanyag.value;
+  // Itt szűrheted a lekért tömbödet
+  // Render függvény meghívása a megszűrt adatokra...
+
+  const filteredRecipes = receptek.filter((recipe) => {
+    const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
+    const matchesKategoria =
+      katVal === "" || recipe.kategoriak.some((k) => k.kod === katVal);
+    const matchesAlapanyag =
+      alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
+
+    return matchesNev && matchesKategoria && matchesAlapanyag;
+  });
+
+  renderRecipes(filteredRecipes);
+}
+
+// Kártya megjelenítő függvény (példa)
+function renderRecipes(recipes) {
+  receptekLista.innerHTML = "";
+
+  if (recipes.length === 0) {
+    receptekLista.innerHTML = `<div class="no-results">Nincs a keresésnek megfelelő recept.</div>`;
+    return;
+  }
+
+  recipes.forEach((recipe) => {
+    const card = document.createElement("div");
+
+    card.className = "recipe-card";
+    card.innerHTML = `
+        <div class="recipe-body">
+          <h3 class="recipe-title">${recipe.nev}</h3>
+          <div class="tags">
+            ${recipe.kategoriak.map((k) => `<span class="tag tag-category">${k.nev}</span>`).join("")}
+            ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
+          </div>
+          ${recipe.forras ? `<div class="recipe-source">Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forras}</a>` : recipe.forras}</div>` : ""}
+          <button class="btn-view" onclick="openModal('${recipe._id}')">Recept megtekintése</button>
+        </div>
+      `;
+    receptekLista.appendChild(card);
+  });
 }
 export { loadKereso };
