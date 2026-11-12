@@ -1,5 +1,5 @@
 async function loadKategoriak() {
-
+ console.log("loadKategoriak() called");
   const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
   if (ujKategoriaGomb) {
     ujKategoriaGomb.addEventListener("click", async (e) => {
