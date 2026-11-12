@@ -99,7 +99,7 @@
       if (isNodeReady.ready) {
         console.log("A szerver elérhető!");
         const kategoriaJs = await import("./js/kategoriak.js");
-        kategoriaJs.loadKategoriak(); // Meghívjuk a default exportált függvényt
+        await kategoriaJs.loadKategoriak(); // Meghívjuk a default exportált függvényt
         //loadKategoriak(); // Meghívjuk a kategória opciók betöltését
         const alapanyagJs = await import("./js/alapanyag.js");
         //alapanyagJs.default(); // Meghívjuk a default exportált függvényt
