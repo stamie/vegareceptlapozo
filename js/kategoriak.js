@@ -1,4 +1,4 @@
-export function loadKategoriak() {
+export default function loadKategoriak() {
 
   const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
   if (ujKategoriaGomb) {
