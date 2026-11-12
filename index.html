@@ -16,32 +16,6 @@
     <link rel="stylesheet" href="./css/style-1.css" />
     <link rel="stylesheet" href="./css/style-2.css" />
     <link rel="stylesheet" href="./css/style-3.css" />
-
-    <!-- JavaScript fájlok -->
-    <script type="module">
-    import pendingNode from "./js/load.js";
-    document.addEventListener("DOMContentLoaded", () => {
-        pendingNode().then(async (isNodeReady) => {
-        console.log("Node.js szerver elérhetősége:", isNodeReady);
-        if (isNodeReady.ready) {
-          // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
-          console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
-          try {
-            let kategoriaModul = await import("./js/kategoriak.js");
-            kategoriaModul.default(); // Meghívjuk a loadKategoriak függvényt
-            await import("./js/receptek.js");
-            await import("./js/alapanyag.js");
-            await import("./js/load-header.js");
-            await import("./js/kereso.js");
-          } catch (error) {
-            console.error("Hiba történt a modulok betöltése közben:", error);
-          }
-        } else {
-          console.error("A Node.js szerver nem elérhető.");
-        }
-      });
-    });
-    </script>
   </head>
   <body>
     <div class="container">
@@ -107,5 +81,37 @@
         ></p>
       </div>
     </div>
+    <!-- JavaScript fájlok -->
+    <script type="module">
+      document.addEventListener("DOMContentLoaded", async () => {
+        let load = await import("./js/load.js");
+        document.addEventListener("DOMContentLoaded", () => {
+          load.default().then(async (isNodeReady) => {
+            console.log("Node.js szerver elérhetősége:", isNodeReady);
+            if (isNodeReady.ready) {
+              // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
+              console.log(
+                "A Node.js szerver elérhető. Folytatjuk a feltöltést.",
+              );
+              try {
+                let kategoriaModul = await import("./js/kategoriak.js");
+                kategoriaModul.default(); // Meghívjuk a loadKategoriak függvényt
+                await import("./js/receptek.js");
+                await import("./js/alapanyag.js");
+                await import("./js/load-header.js");
+                await import("./js/kereso.js");
+              } catch (error) {
+                console.error(
+                  "Hiba történt a modulok betöltése közben:",
+                  error,
+                );
+              }
+            } else {
+              console.error("A Node.js szerver nem elérhető.");
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
