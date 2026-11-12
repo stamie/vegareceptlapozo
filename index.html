@@ -84,7 +84,14 @@
     <!-- JavaScript fájlok -->
     <script type="module">
       document.addEventListener("DOMContentLoaded", async () => {
-        let load = await import("./js/load.js");
+        let load = await import("./js/load.js")
+        .default(() => {
+          console.log("load.js betöltve.");
+        }
+
+        ).catch((error) => {
+          console.error("Hiba történt a load.js betöltése közben:", error);
+        });
         document.addEventListener("DOMContentLoaded", () => {
           load.default().then(async (isNodeReady) => {
             console.log("Node.js szerver elérhetősége:", isNodeReady);
