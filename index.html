@@ -22,7 +22,7 @@
       import pendingNode from "./js/load.js";
       pendingNode().then(async (isNodeReady) => {
         console.log("Node.js szerver elérhetősége:", isNodeReady);
-        if (isNodeReady) {
+        if (isNodeReady.ready) {
           // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
           console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
           try {
