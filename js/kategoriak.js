@@ -1,5 +1,5 @@
 async function loadKategoriak() {
-document.addEventListener("DOMContentLoaded", () => {
+
   const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
   if (ujKategoriaGomb) {
     ujKategoriaGomb.addEventListener("click", async (e) => {
@@ -35,6 +35,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
 }
 export default loadKategoriak;
