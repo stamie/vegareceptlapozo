@@ -1,4 +1,4 @@
-async function loadKategoriak() {
+export function loadKategoriak() {
 
   const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
   if (ujKategoriaGomb) {
@@ -36,5 +36,5 @@ async function loadKategoriak() {
     });
   }
 }
-export default loadKategoriak;
+
 
