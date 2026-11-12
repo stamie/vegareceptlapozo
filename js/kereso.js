@@ -1,17 +1,18 @@
+const keresoNev = document.getElementById("kereso_nev");
+const szuroKategoria = document.getElementById("szuro_kategoria");
+const szuroAlapanyag = document.getElementById("szuro_alapanyag");
+const receptekLista = document.getElementById("receptek_lista");
+
+// Modal elemek
+const modal = document.getElementById("receptModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalTags = document.getElementById("modalTags");
+const modalSource = document.getElementById("modalSource");
+const modalDescription = document.getElementById("modalDescription");
+const modalClose = document.getElementById("modalClose");
 async function loadKereso() {
   console.log("loadKereso() called");
-  const keresoNev = document.getElementById("kereso_nev");
-  const szuroKategoria = document.getElementById("szuro_kategoria");
-  const szuroAlapanyag = document.getElementById("szuro_alapanyag");
-  const receptekLista = document.getElementById("receptek_lista");
 
-  // Modal elemek
-  const modal = document.getElementById("receptModal");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalTags = document.getElementById("modalTags");
-  const modalSource = document.getElementById("modalSource");
-  const modalDescription = document.getElementById("modalDescription");
-  const modalClose = document.getElementById("modalClose");
 
   modalClose.addEventListener("click", () => modal.classList.remove("active"));
 
@@ -75,21 +76,21 @@ async function loadKereso() {
     .catch((error) => console.error("Hiba a receptek betöltésekor:", error));
 
 
-let openModal = (recipeId) => {
-  const recipe = receptek.find((r) => r._id === recipeId);
-  if (recipe) {
-    modalTitle.textContent = recipe.nev;
-    modalTags.innerHTML = `
+  let openModal = (recipeId) => {
+    const recipe = receptek.find((r) => r._id === recipeId);
+    if (recipe) {
+      modalTitle.textContent = recipe.nev;
+      modalTags.innerHTML = `
         ${recipe.kategoriak.map((k) => `<span class="tag tag-category">${k.nev}</span>`).join("")}
         ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
       `;
-    modalSource.innerHTML = recipe.forrasa
-      ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}`
-      : "";
-    modalDescription.textContent = recipe.recept || "Nincs leírás.";
-    modal.classList.add("active");
-  }
-};
+      modalSource.innerHTML = recipe.forrasa
+        ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}`
+        : "";
+      modalDescription.textContent = recipe.recept || "Nincs leírás.";
+      modal.classList.add("active");
+    }
+  };
 }
 function filterRecipes() {
   const nevVal = keresoNev.value.toLowerCase();
