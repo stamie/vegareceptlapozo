@@ -17,11 +17,12 @@ async function pendingNode() {
     if (eredmeny.message == "Hello, World!") {
       let mainNav = document.querySelector(".main-nav");
 
-      console.log(mainNav);
-      let newBtn_ = document.querySelector(".btn-new-recipe");
-      console.log(newBtn_);
+      
       if (mainNav == undefined || mainNav == null )
         return { ready: true };
+      console.log(mainNav);
+      let newBtn_ = mainNav.querySelector(".btn-new-recipe");
+      console.log(newBtn_);
       if (newBtn_ !== undefined && newBtn_ !== null)
         return { ready: true };
 
