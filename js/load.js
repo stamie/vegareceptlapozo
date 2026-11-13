@@ -19,6 +19,7 @@ async function pendingNode() {
 
       console.log(mainNav);
       let newBtn_ = document.querySelector(".btn-new-recipe");
+      console.log(newBtn_);
       if (mainNav == undefined || mainNav == null )
         return { ready: true };
       if (newBtn_ !== undefined && newBtn_ !== null)
