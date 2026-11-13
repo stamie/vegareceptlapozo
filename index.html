@@ -90,14 +90,14 @@
       const module = await import("./js/load.js");
       
       // 2. Kinyerjük a default exportot (ami a pendingNode függvényünk)
-      //const pendingNode = module.default;
+      
       
       console.log("load.js sikeresen betöltve.");
 
       // 3. Meghívhatjuk a függvényt
-      let isNodeReady = module.pendingNode();
+      const isNodeReady = await module.pendingNode();
       
-      if (await isNodeReady.ready) {
+      if (isNodeReady.ready) {
         console.log("A szerver elérhető!");
         const keresoJs = await import("./js/kereso.js");
         await keresoJs.loadKereso(); // Meghívjuk a default exportált függvényt
