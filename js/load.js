@@ -21,7 +21,7 @@ async function pendingNode() {
       let newBtn_ = document.querySelector(".btn-new-recipe");
       if (mainNav == undefined || mainNav == null )
         return { ready: true };
-      if (newBtn_ !== undefined || newBtn_ !== null)
+      if (newBtn_ !== undefined && newBtn_ !== null)
         return { ready: true };
 
       if (eredmeny.user != null) {
