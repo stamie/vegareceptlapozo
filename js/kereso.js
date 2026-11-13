@@ -10,6 +10,11 @@ const modalTags = document.getElementById("modalTags");
 const modalSource = document.getElementById("modalSource");
 const modalDescription = document.getElementById("modalDescription");
 const modalClose = document.getElementById("modalClose");
+
+let receptek = [];
+let kategoriak = [];
+let alapanyagok = [];
+  
 async function loadKereso() {
   console.log("loadKereso() called");
 
@@ -20,9 +25,7 @@ async function loadKereso() {
   keresoNev.addEventListener("input", filterRecipes);
   szuroKategoria.addEventListener("change", filterRecipes);
   szuroAlapanyag.addEventListener("change", filterRecipes);
-  let receptek = [];
-  let kategoriak = [];
-  let alapanyagok = [];
+  
   fetch("https://node-receptek.onrender.com/data/kategoriak")
     .then((response) => response.json())
     .then((data) => {
