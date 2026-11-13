@@ -14,7 +14,7 @@ const modalClose = document.getElementById("modalClose");
 let receptek = [];
 let kategoriak = [];
 let alapanyagok = [];
-  
+
 async function loadKereso() {
   console.log("loadKereso() called");
 
@@ -25,7 +25,7 @@ async function loadKereso() {
   keresoNev.addEventListener("input", filterRecipes);
   szuroKategoria.addEventListener("change", filterRecipes);
   szuroAlapanyag.addEventListener("change", filterRecipes);
-  
+
   fetch("https://node-receptek.onrender.com/data/kategoriak")
     .then((response) => response.json())
     .then((data) => {
@@ -77,24 +77,24 @@ async function loadKereso() {
       renderRecipes(receptek); // Kezdeti renderelés
     })
     .catch((error) => console.error("Hiba a receptek betöltésekor:", error));
+}
 
-
-  let openModal = (recipeId) => {
-    const recipe = receptek.find((r) => r._id === recipeId);
-    if (recipe) {
-      modalTitle.textContent = recipe.nev;
-      modalTags.innerHTML = `
+let openModal = (recipeId) => {
+  const recipe = receptek.find((r) => r._id === recipeId);
+  if (recipe) {
+    modalTitle.textContent = recipe.nev;
+    modalTags.innerHTML = `
         ${recipe.kategoriak.map((k) => `<span class="tag tag-category">${k.nev}</span>`).join("")}
         ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
       `;
-      modalSource.innerHTML = recipe.forrasa
-        ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}`
-        : "";
-      modalDescription.textContent = recipe.recept || "Nincs leírás.";
-      modal.classList.add("active");
-    }
-  };
-}
+    modalSource.innerHTML = recipe.forrasa
+      ? `Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forrasa}</a>` : recipe.forras}`
+      : "";
+    modalDescription.textContent = recipe.recept || "Nincs leírás.";
+    modal.classList.add("active");
+  }
+};
+
 function filterRecipes() {
   const nevVal = keresoNev.value.toLowerCase();
   const katVal = szuroKategoria.value;
