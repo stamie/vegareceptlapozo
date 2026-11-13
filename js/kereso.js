@@ -142,4 +142,5 @@ function renderRecipes(recipes) {
     receptekLista.appendChild(card);
   });
 }
-export { loadKereso, openModal };
+export { loadKereso };
+export { openModal };
