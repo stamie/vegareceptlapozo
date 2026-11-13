@@ -69,11 +69,6 @@ async function loadKereso() {
     .then((response) => response.json())
     .then((data) => {
       receptek = data.data;
-      const user = data.user;
-
-      if (user) {
-        document.getElementsByClassName("main-nav")[0].innerHTML += '<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe">+ Új Recept</a>';
-      }
       renderRecipes(receptek); // Kezdeti renderelés
     })
     .catch((error) => console.error("Hiba a receptek betöltésekor:", error));
