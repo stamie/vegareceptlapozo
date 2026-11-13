@@ -40,5 +40,5 @@ async function pendingNode() {
     return { ready: false };
   }
 }
-export default pendingNode;
+export { pendingNode };
 
