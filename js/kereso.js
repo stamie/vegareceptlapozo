@@ -79,7 +79,7 @@ async function loadKereso() {
     .catch((error) => console.error("Hiba a receptek betöltésekor:", error));
 }
 
-let openModal = (recipeId) => {
+function openModal (recipeId) {
   const recipe = receptek.find((r) => r._id === recipeId);
   if (recipe) {
     modalTitle.textContent = recipe.nev;
