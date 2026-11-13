@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+async function loadAlapanyagok() {
   const ujAlapanyagGomb = document.getElementById("uj_alapanyag_gomb");
   if (ujAlapanyagGomb) {
     ujAlapanyagGomb.addEventListener("click", async (e) => {
@@ -34,4 +34,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
+}
+export {loadAlapanyagok};

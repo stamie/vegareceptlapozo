@@ -1,7 +1,7 @@
 const keresoNev = document.getElementById("kereso_nev");
 const szuroKategoria = document.getElementById("szuro_kategoria");
 const szuroAlapanyag = document.getElementById("szuro_alapanyag");
-const receptekLista = document.getElementById("receptek_lista");
+let receptekLista = document.getElementById("receptek_lista");
 
 // Modal elemek
 const modal = document.getElementById("receptModal");

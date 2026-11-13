@@ -1,21 +1,22 @@
+const receptForm = document.getElementById("receptForm");
+const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
+const ujAlapanyagGomb = document.getElementById("uj_alapanyag_gomb");
+const alapanyagHozzadasa = document.getElementById("alapanyag_hozzadasa");
+const kategoriaHozzadasa = document.getElementById("kategoria_hozzadasa");
+const alapanyagKereso = document.getElementById("alapanyag_kereso");
+const alapanyagSelect = document.getElementById("alapanyagok_select");
+const kategoriaKereso = document.getElementById("kategoria_kereso");
+const kategoriaSelect = document.getElementById("kategoriak_select");
+const alapanyagTbody = document.querySelector("#alapanyagok tbody");
+const kategoriaTbody = document.querySelector("#kategoriak tbody");
+const url = "https://node-receptek.onrender.com/data/receptek";
+const alapanyagokUrl = "https://node-receptek.onrender.com/data/alapanyagok";
+const kategoriakUrl = "https://node-receptek.onrender.com/data/kategoriak";
+const receptMenteseGomb = document.getElementById("recept_mentese");
+const menuForm = document.getElementById("menuForm");
+
 async function loadReceptek() {
   console.log("loadReceptek() called");
-const receptForm = document.getElementById("receptForm");
-  const ujKategoriaGomb = document.getElementById("uj_kategoria_gomb");
-  const ujAlapanyagGomb = document.getElementById("uj_alapanyag_gomb");
-  const alapanyagHozzadasa = document.getElementById("alapanyag_hozzadasa");
-  const kategoriaHozzadasa = document.getElementById("kategoria_hozzadasa");
-  const alapanyagKereso = document.getElementById("alapanyag_kereso");
-  const alapanyagSelect = document.getElementById("alapanyagok_select");
-  const kategoriaKereso = document.getElementById("kategoria_kereso");
-  const kategoriaSelect = document.getElementById("kategoriak_select");
-  const alapanyagTbody = document.querySelector("#alapanyagok tbody");
-  const kategoriaTbody = document.querySelector("#kategoriak tbody");
-  const url = "https://node-receptek.onrender.com/data/receptek";
-  const alapanyagokUrl = "https://node-receptek.onrender.com/data/alapanyagok";
-  const kategoriakUrl = "https://node-receptek.onrender.com/data/kategoriak";
-  const receptMenteseGomb = document.getElementById("recept_mentese");
-  const menuForm = document.getElementById("menuForm");
 
   if (alapanyagSelect) {
     fetch(alapanyagokUrl)
@@ -244,7 +245,7 @@ const receptForm = document.getElementById("receptForm");
           } else {
             alert("Sikertelen mentés!");
           }
-          
+
         } catch (error) {
           console.error("Hiba a küldés során:", error);
           alert("Hiba történt a mentés során. Kérlek próbáld újra!");

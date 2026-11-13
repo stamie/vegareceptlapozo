@@ -15,26 +15,8 @@
     <link rel="stylesheet" href="./css/style.css" />
 
     <!-- Eredeti JS fájlok -->
-    <script src="./js/load.js"></script>
-    <script>
-      pendingNode().then(async (isNodeReady) => {
-        if (isNodeReady) {
-          // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
-          console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
-          try {
-            await import("./js/kategoriak.js");
-            await import("./js/receptek.js");
-            await import("./js/alapanyag.js");
-            await import("./js/load-header.js");
-            await import("./js/kereso.js");
-          } catch (error) {
-            console.error("Hiba történt a modulok betöltése közben:", error);
-          }          
-        } else {
-          console.error("A Node.js szerver nem elérhető.");
-        }
-      });
-    </script>
+     <script src="./js/load-header.js"></script>
+    
   </head>
   <body>
     <div class="container">
@@ -164,5 +146,43 @@
         </button>
       </form>
     </div>
+    <script>
+            
+            await import("./js/load-header.js");
+            
+          
+    </script>
+    <script type="module">
+      document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      // 1. Dinamikusan betöltjük a modult
+      const module = await import("./js/load.js");
+      
+      // 2. Kinyerjük a default exportot (ami a pendingNode függvényünk)
+      const pendingNode = module.default;
+      
+      console.log("load.js sikeresen betöltve.");
+
+      // 3. Meghívhatjuk a függvényt
+      const isNodeReady = await pendingNode();
+      
+      if (isNodeReady.ready) {
+        console.log("A szerver elérhető!");
+        const kategoriakJs = await import("./js/kategoriak.js");
+        await kategoriakJs.loadKategoriak(); // Meghívjuk a default exportált függvényt
+        const receptekJs = await import("./js/receptek.js");
+        await receptekJs.loadReceptek();
+        const alapanyagokJs = await import("./js/alapanyag.js");
+        await alapanyagokJs.loadAlapanyagok();
+
+      } else {
+        console.log("A szerver nem válaszol.");
+      }
+      
+    } catch (error) {
+      console.error("Hiba történt a betöltés során:", error);
+    }
+  });
+    </script>
   </body>
 </html>
