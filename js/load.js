@@ -15,6 +15,10 @@ async function pendingNode() {
         headers: header,
       }).then((response) => response.json());
       if (eredmeny.message == "Hello, World!") {
+        let mainNav = document.querySelector(".main-nav")[0];
+        if (eredmeny.user == null) {
+          mainNav.innerHtml += '<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe">+ Új Recept</a>'
+        }
         return { ready: true };
       } else {
         return { ready: false };
