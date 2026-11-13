@@ -16,11 +16,12 @@ async function pendingNode() {
     }).then((response) => response.json());
     if (eredmeny.message == "Hello, World!") {
       let mainNav = document.querySelector(".main-nav");
-      //if (eredmeny.user == null) {
+
       console.log(mainNav);
       let newBtn = document.querySelector(".btn-new-recipe");
       if (mainNav == undefined || mainNav == null || newBtn !== undefined || newBtn !== null)
         return { ready: true };
+      
       if (eredmeny.user != null) {
         const newBtn = document.createElement('a');
         newBtn.href = "./feltoltes.html";
@@ -29,9 +30,7 @@ async function pendingNode() {
         newBtn.textContent = '+ Új Recept';
         mainNav.appendChild(newBtn);
       }
-      //<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe"></a>
-
-      //}
+     
       return { ready: true };
     } else {
       return { ready: false };
