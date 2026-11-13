@@ -85,31 +85,28 @@
     <!-- JavaScript fájlok -->
     <script type="module">
       document.addEventListener("DOMContentLoaded", async () => {
-    try {
-      // 1. Dinamikusan betöltjük a modult
-      const module = await import("./js/load.js");
-      
-      // 2. Kinyerjük a default exportot (ami a pendingNode függvényünk)
-      
-      
-      console.log("load.js sikeresen betöltve.");
+        try {
+          // 1. Dinamikusan betöltjük a modult
+          const module = await import("./js/load.js");
 
-      // 3. Meghívhatjuk a függvényt
-      const isNodeReady = await module.pendingNode();
-      
-      if (isNodeReady.ready) {
-        console.log("A szerver elérhető!");
-        const keresoJs = await import("./js/kereso.js");
-        await keresoJs.loadKereso(); // Meghívjuk a default exportált függvényt
-        
-      } else {
-        console.log("A szerver nem válaszol.");
-      }
-      
-    } catch (error) {
-      console.error("Hiba történt a betöltés során:", error);
-    }
-  });
+          // 2. Kinyerjük a default exportot (ami a pendingNode függvényünk)
+
+          console.log("load.js sikeresen betöltve.");
+
+          // 3. Meghívhatjuk a függvényt
+          const isNodeReady = await module.pendingNode();
+
+          if (isNodeReady.ready) {
+            console.log("A szerver elérhető!");
+            const keresoJs = await import("./js/kereso.js");
+            await keresoJs.loadKereso(); // Meghívjuk a default exportált függvényt
+          } else {
+            console.log("A szerver nem válaszol.");
+          }
+        } catch (error) {
+          console.error("Hiba történt a betöltés során:", error);
+        }
+      });
     </script>
   </body>
 </html>

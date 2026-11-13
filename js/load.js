@@ -21,8 +21,12 @@ async function pendingNode() {
       if (mainNav == undefined || mainNav == null )
         return { ready: true };
       
+      let newBtn = mainNav.getElementById("btn-new-recipe");
+      if (newBtn != undefined && newBtn != null )
+        return { ready: true };
+      
       if (eredmeny.user != null) {
-        const newBtn = document.createElement('a');
+        newBtn = document.createElement('a');
         newBtn.href = "./feltoltes.html";
         newBtn.id = "btn-new-recipe";
         newBtn.className = "btn-new-recipe";
