@@ -95,7 +95,7 @@
       console.log("load.js sikeresen betöltve.");
 
       // 3. Meghívhatjuk a függvényt
-      const isNodeReady = await module.pendingNode();
+      const isNodeReady = await module.default;
       
       if (isNodeReady.ready) {
         console.log("A szerver elérhető!");
