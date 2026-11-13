@@ -18,10 +18,12 @@ async function pendingNode() {
       let mainNav = document.querySelector(".main-nav");
 
       console.log(mainNav);
-      let newBtn = document.querySelector(".btn-new-recipe");
-      if (mainNav == undefined || mainNav == null || newBtn !== undefined || newBtn !== null)
+      let newBtn_ = document.querySelector(".btn-new-recipe");
+      if (mainNav == undefined || mainNav == null )
         return { ready: true };
-      
+      if (newBtn_ !== undefined || newBtn_ !== null)
+        return { ready: true };
+
       if (eredmeny.user != null) {
         const newBtn = document.createElement('a');
         newBtn.href = "./feltoltes.html";
