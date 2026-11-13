@@ -19,7 +19,8 @@ async function pendingNode() {
       //if (eredmeny.user == null) {
       console.log(mainNav);
       let newBtn = document.querySelector(".btn-new-recipe");
-      if (mainNav !== undefined || mainNav !== null || newBtn == undefined || newBtn == null )
+      if (mainNav == undefined || mainNav == null || newBtn !== undefined || newBtn !== null)
+        return { ready: true };
       if (eredmeny.user != null) {
         const newBtn = document.createElement('a');
         newBtn.href = "./feltoltes.html";
