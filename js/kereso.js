@@ -136,7 +136,7 @@ function renderRecipes(recipes) {
             ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
           </div>
           ${recipe.forras ? `<div class="recipe-source">Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forras}</a>` : recipe.forras}</div>` : ""}
-          <button class="btn-view" onclick="keresoJs.openModal('${recipe._id}')">Recept megtekintése</button>
+          <button class="btn-view" onclick="openModal('${recipe._id}')">Recept megtekintése</button>
         </div>
       `;
     receptekLista.appendChild(card);
