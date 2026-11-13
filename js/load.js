@@ -18,7 +18,12 @@ async function pendingNode() {
         let mainNav = document.querySelector(".main-nav");
         //if (eredmeny.user == null) {
           console.log(mainNav);
-          mainNav.appendChild('a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe"'). innerHtml += '+ Új Recept';
+          const newBtn = document.createElement('a');
+          newBtn.href="./feltoltes.html";
+          newBtn.id="btn-new-recipe";
+          newBtn.class="btn-new-recipe";
+          newBtn.innerHtml += '+ Új Recept';
+          mainNav.appendChild(newBtn); 
           //<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe"></a>
 
         //}
