@@ -21,7 +21,7 @@ async function pendingNode() {
       if (mainNav == undefined || mainNav == null )
         return { ready: true };
       
-      let newBtn = mainNav.getElementById("btn-new-recipe");
+      let newBtn = document.getElementById("btn-new-recipe");
       if (newBtn != undefined && newBtn != null )
         return { ready: true };
       
