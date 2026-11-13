@@ -101,7 +101,7 @@
         console.log("A szerver elérhető!");
         const keresoJs = await import("./js/kereso.js");
         await keresoJs.loadKereso(); // Meghívjuk a default exportált függvényt
-        let openModal = keresoJs.openModal;
+        
       } else {
         console.log("A szerver nem válaszol.");
       }
