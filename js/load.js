@@ -22,7 +22,7 @@ async function pendingNode() {
           newBtn.href="./feltoltes.html";
           newBtn.id="btn-new-recipe";
           newBtn.class="btn-new-recipe";
-          newBtn.innerHtml += '+ Új Recept';
+          newBtn.innerHtml = '+ Új Recept';
           mainNav.appendChild(newBtn); 
           //<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe"></a>
 
