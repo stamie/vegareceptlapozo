@@ -1,76 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bejelentkezés - Recepttár</title>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/login.css">
-  <script src="./js/load.js"></script>
-    <script>
-      pendingNode().then(async (isNodeReady) => {
-        if (isNodeReady) {
-          // A Node.js szerver elérhető, folytathatjuk a feltöltési folyamatot
-          console.log("A Node.js szerver elérhető. Folytatjuk a feltöltést.");
-          try {
-            await import("./js/login.js");
-          } catch (error) {
-            console.error("Hiba történt a modul betöltése közben:", error);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bejelentkezés - Recepttár</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <script src="./js/load.js"></script>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-header">
+        <div class="logo-icon">🍳</div>
+        <h1>Üdv újra!</h1>
+        <p class="login-subtitle">Jelentkezz be a receptek kezeléséhez</p>
+      </div>
+
+      <form id="loginForm">
+        <!-- Email / Felhasználónév -->
+        <div class="form-group">
+          <label for="email">E-mail cím vagy felhasználónév</label>
+          <input type="text" id="email" placeholder="pelda@email.hu" required />
+        </div>
+
+        <!-- Jelszó -->
+        <div class="form-group">
+          <div class="label-row">
+            <label for="password">Jelszó</label>
+            <a href="#" class="forgot-password">Elfelejtetted?</a>
+          </div>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <!-- Megjegyzés / Emlékezz rám -->
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" id="remember" />
+            <span>Emlékezz rám</span>
+          </label>
+        </div>
+
+        <!-- Bejelentkezés gomb -->
+        <button type="submit" class="btn-submit">Bejelentkezés</button>
+
+        <div class="login-footer">
+          <p></p>
+        </div>
+      </form>
+    </div>
+
+    <script src="./js/login.js"></script>
+    <script type="module">
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          // 1. Dinamikusan betöltjük a modult
+          const module = await import("./js/load.js");
+
+          // 2. Kinyerjük a default exportot (ami a pendingNode függvényünk)
+          const pendingNode = module.default;
+
+          console.log("load.js sikeresen betöltve.");
+
+          // 3. Meghívhatjuk a függvényt
+          const isNodeReady = await pendingNode();
+
+          if (isNodeReady.ready) {
+            console.log("A szerver elérhető!");
+          } else {
+            console.log("A szerver nem válaszol.");
           }
-        } else {
-          console.error("A Node.js szerver nem elérhető.");
+        } catch (error) {
+          console.error("Hiba történt a betöltés során:", error);
         }
       });
     </script>
-
-</head>
-<body>
-
-  <div class="login-container">
-    <div class="login-header">
-      <div class="logo-icon">🍳</div>
-      <h1>Üdv újra!</h1>
-      <p class="login-subtitle">Jelentkezz be a receptek kezeléséhez</p>
-    </div>
-
-    <form id="loginForm">
-      <!-- Email / Felhasználónév -->
-      <div class="form-group">
-        <label for="email">E-mail cím vagy felhasználónév</label>
-        <input type="text" id="email" placeholder="pelda@email.hu" required />
-      </div>
-
-      <!-- Jelszó -->
-      <div class="form-group">
-        <div class="label-row">
-          <label for="password">Jelszó</label>
-          <a href="#" class="forgot-password">Elfelejtetted?</a>
-        </div>
-        <input type="password" id="password" placeholder="••••••••" required />
-      </div>
-
-      <!-- Megjegyzés / Emlékezz rám -->
-      <div class="form-options">
-        <label class="checkbox-label">
-          <input type="checkbox" id="remember">
-          <span>Emlékezz rám</span>
-        </label>
-      </div>
-
-      <!-- Bejelentkezés gomb -->
-      <button type="submit" class="btn-submit">Bejelentkezés</button>
-
-      <div class="login-footer">
-        <p></p>
-      </div>
-    </form>
-  </div>
-
-  <script src="./js/login.js"></script>
-</body>
+  </body>
 </html>
