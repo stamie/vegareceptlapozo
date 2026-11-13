@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("token", data.token);
 
             alert("Sikeres bejelentkezés!");
-            window.location.href = "./kereso.html"; // Átirányítás a kereső oldalra[cite: 1]
+            window.location.href = "./index.html"; // Átirányítás a kereső oldalra[cite: 1]
           }
         } else {
           alert(data.message || "Hibás bejelentkezési adatok!");
