@@ -21,7 +21,7 @@ async function pendingNode() {
           const newBtn = document.createElement('a');
           newBtn.href="./feltoltes.html";
           newBtn.id="btn-new-recipe";
-          newBtn.class="btn-new-recipe";
+          newBtn.className="btn-new-recipe";
           newBtn.textContent = '+ Új Recept';
           mainNav.appendChild(newBtn); 
           //<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe"></a>
