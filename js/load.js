@@ -18,7 +18,7 @@ async function pendingNode() {
         let mainNav = document.querySelector(".main-nav");
         //if (eredmeny.user == null) {
           console.log(mainNav);
-          //mainNav.innerHtml += '<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe">+ Új Recept</a>'
+          mainNav.appendChild('<a href="./feltoltes.html" id="btn-new-recipe" class="btn-new-recipe">+ Új Recept</a>');
         //}
         return { ready: true };
       } else {
