@@ -79,7 +79,7 @@ async function loadKereso() {
     .catch((error) => console.error("Hiba a receptek betöltésekor:", error));
 }
 
-function openModal (recipeId) {
+function openModal(recipeId) {
   const recipe = receptek.find((r) => r._id === recipeId);
   if (recipe) {
     modalTitle.textContent = recipe.nev;
@@ -136,11 +136,16 @@ function renderRecipes(recipes) {
             ${recipe.alapanyagok.map((a) => `<span class="tag">${a.nev}</span>`).join("")}
           </div>
           ${recipe.forras ? `<div class="recipe-source">Forrás: ${recipe.link ? `<a href="${recipe.link}" target="_blank">${recipe.forras}</a>` : recipe.forras}</div>` : ""}
-          <button class="btn-view" onclick="openModal('${recipe._id}')">Recept megtekintése</button>
+          <button class="btn-view" data-id="${recipe._id}">Recept megtekintése</button>
         </div>
       `;
+    const btnView = card.querySelector(".btn-view");
+    btnView.addEventListener("click", () => {
+      openModal(recipe._id);
+    });
     receptekLista.appendChild(card);
   });
 }
-export { loadKereso };
-export { openModal };
+window.openModal = openModal;
+export { loadKereso, openModal };
+
