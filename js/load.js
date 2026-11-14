@@ -36,6 +36,7 @@ async function pendingNode() {
         newBtn = document.createElement('button');
         newBtn.onclick = () => {
             localStorage.removeItem('token');
+            window.location.reload();
         };
         newBtn.id = "btn-logout";
         newBtn.className = "btn-logout";
