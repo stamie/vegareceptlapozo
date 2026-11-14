@@ -32,6 +32,15 @@ async function pendingNode() {
         newBtn.className = "btn-new-recipe";
         newBtn.textContent = '+ Új Recept';
         mainNav.appendChild(newBtn);
+
+        newBtn = document.createElement('button');
+        newBtn.onclick = () => {
+            localStorage.removeItem('token');
+        };
+        newBtn.id = "btn-logout";
+        newBtn.className = "btn-logout";
+        newBtn.textContent = 'Kilépés';
+        mainNav.appendChild(newBtn);
       }
      
       return { ready: true };
