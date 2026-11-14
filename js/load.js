@@ -17,7 +17,6 @@ async function pendingNode() {
     if (eredmeny.message == "Hello, World!") {
       let mainNav = document.querySelector(".main-nav");
 
-
       if (mainNav == undefined || mainNav == null)
         return { ready: true };
 
