@@ -17,34 +17,35 @@ async function pendingNode() {
     if (eredmeny.message == "Hello, World!") {
       let mainNav = document.querySelector(".main-nav");
 
-      
-      if (mainNav == undefined || mainNav == null )
+
+      if (mainNav == undefined || mainNav == null)
         return { ready: true };
-      
+
       let newBtn = document.getElementById("btn-new-recipe");
-      if (newBtn != undefined && newBtn != null )
+      if (newBtn != undefined && newBtn != null)
         return { ready: true };
-      
+
       if (eredmeny.user != null) {
-        console.log(window.location.href.indexOf('/feltoltes.html'));
-        newBtn = document.createElement('a');
-        newBtn.href = "./feltoltes.html";
-        newBtn.id = "btn-new-recipe";
-        newBtn.className = "btn-new-recipe";
-        newBtn.textContent = '+ Új Recept';
-        mainNav.appendChild(newBtn);
+        if (window.location.href.indexOf('/feltoltes.html') > -1) {
+          newBtn = document.createElement('a');
+          newBtn.href = "./feltoltes.html";
+          newBtn.id = "btn-new-recipe";
+          newBtn.className = "btn-new-recipe";
+          newBtn.textContent = '+ Új Recept';
+          mainNav.appendChild(newBtn);
+        }
 
         newBtn = document.createElement('button');
         newBtn.onclick = () => {
-            localStorage.removeItem('token');
-            window.location.reload();
+          localStorage.removeItem('token');
+          window.location.reload();
         };
         newBtn.id = "btn-logout";
         newBtn.className = "btn-logout";
         newBtn.textContent = 'Kilépés';
         mainNav.appendChild(newBtn);
       }
-     
+
       return { ready: true };
     } else {
       return { ready: false };
