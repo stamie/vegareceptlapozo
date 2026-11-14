@@ -26,6 +26,7 @@ async function pendingNode() {
         return { ready: true };
       
       if (eredmeny.user != null) {
+        console.log(window.location.href);
         newBtn = document.createElement('a');
         newBtn.href = "./feltoltes.html";
         newBtn.id = "btn-new-recipe";
