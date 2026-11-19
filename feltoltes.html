@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recept feltöltése</title>
+    <title>Recept feltöltése - Vega Recept Lapozó</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,9 +16,10 @@
     <script src="./js/load-header.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container form-container">
       <!-- Fejléc -->
       <div id="header-container"></div>
+      
       <h1>Új Recept Feltöltése</h1>
 
       <form id="receptForm">
@@ -64,7 +65,7 @@
           <table id="kategoriak">
             <thead>
               <tr>
-                <td>Kategóriák</td>
+                <th>Kategóriák</th>
               </tr>
             </thead>
             <tbody>
@@ -104,7 +105,7 @@
           <table id="alapanyagok">
             <thead>
               <tr>
-                <td>Hozzávaló</td>
+                <th>Hozzávaló</th>
               </tr>
             </thead>
             <tbody>
@@ -148,35 +149,26 @@
   
     <script type="module">
       document.addEventListener("DOMContentLoaded", async () => {
-    try {
-      // 1. Dinamikusan betöltjük a modult
-      const module = await import("./js/load.js");
-      
-      // 2. Kinyerjük a default exportot (ami a pendingNode függvényünk)
-      
-      
-      console.log("load.js sikeresen betöltve.");
-
-      // 3. Meghívhatjuk a függvényt
-      const isNodeReady = await module.pendingNode();
-      
-      if (isNodeReady.ready) {
-        console.log("A szerver elérhető!");
-        const kategoriakJs = await import("./js/kategoriak.js");
-        await kategoriakJs.loadKategoriak(); // Meghívjuk a default exportált függvényt
-        const receptekJs = await import("./js/receptek.js");
-        await receptekJs.loadReceptek();
-        const alapanyagokJs = await import("./js/alapanyag.js");
-        await alapanyagokJs.loadAlapanyagok();
-
-      } else {
-        console.log("A szerver nem válaszol.");
-      }
-      
-    } catch (error) {
-      console.error("Hiba történt a betöltés során:", error);
-    }
-  });
+        try {
+          const module = await import("./js/load.js");
+          console.log("load.js sikeresen betöltve.");
+          const isNodeReady = await module.pendingNode();
+          
+          if (isNodeReady.ready) {
+            console.log("A szerver elérhető!");
+            const kategoriakJs = await import("./js/kategoriak.js");
+            await kategoriakJs.loadKategoriak();
+            const receptekJs = await import("./js/receptek.js");
+            await receptekJs.loadReceptek();
+            const alapanyagokJs = await import("./js/alapanyag.js");
+            await alapanyagokJs.loadAlapanyagok();
+          } else {
+            console.log("A szerver nem válaszol.");
+          }
+        } catch (error) {
+          console.error("Hiba történt a betöltés során:", error);
+        }
+      });
     </script>
   </body>
 </html>
