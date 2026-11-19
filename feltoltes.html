@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recept feltöltése - Vega Recept Lapozó</title>
-
+    <!-- Alapértelmezett favicon a böngésző fülekhez -->
+    <link rel="icon" href="/img/favicon.ico" sizes="any" />
+    <!-- Modern PNG favicon (32x32 px) -->
+    <link
+      rel="icon"
+      href="/img/favicon-32x32.png"
+      type="image/png"
+      sizes="32x32"
+    />
+    <!-- Apple Touch Icon iOS eszközökhöz (Főképernyőre mentéskor) -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,7 +29,7 @@
     <div class="container form-container">
       <!-- Fejléc -->
       <div id="header-container"></div>
-      
+
       <h1>Új Recept Feltöltése</h1>
 
       <form id="receptForm">
@@ -146,14 +156,14 @@
         </button>
       </form>
     </div>
-  
+
     <script type="module">
       document.addEventListener("DOMContentLoaded", async () => {
         try {
           const module = await import("./js/load.js");
           console.log("load.js sikeresen betöltve.");
           const isNodeReady = await module.pendingNode();
-          
+
           if (isNodeReady.ready) {
             console.log("A szerver elérhető!");
             const kategoriakJs = await import("./js/kategoriak.js");
