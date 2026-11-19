@@ -1,14 +1,16 @@
 :root {
-    --primary: #10b981;
-    --primary-hover: #059669;
-    --bg-color: #f3f4f6;
-    --card-bg: #ffffff;
-    --text-color: #1f2937;
-    --text-muted: #6b7280;
-    --border-color: #e5e7eb;
-    --subtle-bg: #f9fafb;
+    /* Természetesebb, melegebb zöldek a logóhoz igazítva */
+    --primary: #4a7c59;          /* Földesebb, mélyebb zöld (az olajbogyó / fa levelek alapján) */
+    --primary-hover: #3a6347;    /* Sötétebb árnyalat hover állapotra */
+    
+    /* Finom, papír-hatású háttér és semleges színek */
+    --bg-color: #f7f5f0;         /* Enyhén meleg, pergamen/papír jellegű háttér */
+    --card-bg: #ffffff;          /* Kártyák háttere */
+    --text-color: #2c3531;       /* Puha sötétzöldes-szürke a fekete helyett, barátságosabb olvasáshoz */
+    --text-muted: #6b7280;       /* Másodlagos szövegszín */
+    --border-color: #e3dec9;     /* Melegebb, papírszerű szegélyszín */
+    --subtle-bg: #f0ebe1;        /* Finom kiemelés háttér */
 }
-
 * {
     box-sizing: border-box;
     margin: 0;
