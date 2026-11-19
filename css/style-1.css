@@ -13,7 +13,7 @@
 
 .logo {
   display: flex;
-  align-items: center;
+  align-items: left;
   gap: 10px;
   font-weight: 700;
   font-size: 1.25rem;
@@ -24,7 +24,7 @@
   font-size: 1.5rem;
 }
 .logo-icon img {
-  max-width: 190px;
+  max-width: 240px;
 }
 
 .main-nav {
