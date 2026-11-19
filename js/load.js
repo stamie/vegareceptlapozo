@@ -25,6 +25,12 @@ async function pendingNode() {
         return { ready: true };
 
       if (eredmeny.user != null) {
+          newBtn = document.createElement('a');
+          newBtn.href = "/";
+          newBtn.id = "nav-link active";
+          newBtn.className = "nav-link active";
+          newBtn.textContent = 'Receptek böngészése';
+          mainNav.appendChild(newBtn);
         if (window.location.href.indexOf('/feltoltes.html') == -1) {
           newBtn = document.createElement('a');
           newBtn.href = "./feltoltes.html";
