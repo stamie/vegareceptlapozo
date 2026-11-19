@@ -22,6 +22,8 @@
 
 .logo-icon {
   font-size: .5rem;
+}
+.logo-icon img {
   max-width: 250px;
 }
 
