@@ -21,7 +21,8 @@
 }
 
 .logo-icon {
-  font-size: 1.5rem;
+  font-size: .5rem;
+  max-width: 250px;
 }
 
 .main-nav {
