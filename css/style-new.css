@@ -1,16 +1,14 @@
 :root {
-    /* Természetesebb, melegebb zöldek a logóhoz igazítva */
-    --primary: #4a7c59;          /* Földesebb, mélyebb zöld (az olajbogyó / fa levelek alapján) */
-    --primary-hover: #3a6347;    /* Sötétebb árnyalat hover állapotra */
-    
-    /* Finom, papír-hatású háttér és semleges színek */
-    --bg-color: #f7f5f0;         /* Enyhén meleg, pergamen/papír jellegű háttér */
-    --card-bg: #ffffff;          /* Kártyák háttere */
-    --text-color: #2c3531;       /* Puha sötétzöldes-szürke a fekete helyett, barátságosabb olvasáshoz */
-    --text-muted: #6b7280;       /* Másodlagos szövegszín */
-    --border-color: #e3dec9;     /* Melegebb, papírszerű szegélyszín */
-    --subtle-bg: #f0ebe1;        /* Finom kiemelés háttér */
+    --primary: #4a7c59;
+    --primary-hover: #3a6347;
+    --bg-color: #f7f5f0;
+    --card-bg: #ffffff;
+    --text-color: #2c3531;
+    --text-muted: #6b7280;
+    --border-color: #e3dec9;
+    --subtle-bg: #f0ebe1;
 }
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -146,7 +144,7 @@ input[type="text"]:focus,
 select:focus,
 textarea:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.15); /* Lágyabb, természetes fókusz árnyék */
 }
 
 /* Recept Kártyák Grid */
@@ -169,7 +167,7 @@ textarea:focus {
 
 .recipe-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
 .recipe-body {
@@ -204,9 +202,9 @@ textarea:focus {
 }
 
 .tag-category {
-    background-color: #ecfdf5;
-    color: #047857;
-    border-color: #a7f3d0;
+    background-color: #e7ede8;
+    color: #35523d;
+    border-color: #c5d4c8;
 }
 
 .recipe-source {
@@ -238,14 +236,76 @@ textarea:focus {
 }
 
 .btn-view:hover {
-    background-color: #e5e7eb;
+    background-color: #e3dec9;
 }
 
-/* Nincs találat */
-.no-results {
-    text-align: center;
-    padding: 48px;
+/* Modal stílusok */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(44, 53, 49, 0.4);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 32px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.btn-close {
+    background: var(--subtle-bg);
+    border: 1px solid var(--border-color);
     color: var(--text-muted);
-    font-size: 1.1rem;
-    grid-column: 1 / -1;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-close:hover {
+    background-color: #e3dec9;
+    color: var(--text-color);
 }
