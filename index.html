@@ -47,55 +47,50 @@
               placeholder="Pl.: Gyümölcsös piskóta..."
             />
           </div>
-</div>
-<div class="search_row">
-          
-            <!-- Kategória szűrő -->
-            <div class="form-group">
-              <label>Kategória</label>
-              <div
-                class="custom-multiselect"
-                id="ms_kategoria"
-                data-placeholder="Összes kategória"
-              >
-                <div class="multiselect-trigger" tabindex="0">
-                  <div class="selected-tags">
-                    <span class="placeholder">Összes kategória</span>
-                  </div>
-                  <span class="arrow">▼</span>
-                </div>
-                <div class="multiselect-dropdown">
-                  <input
-                    type="text"
-                    class="multiselect-search"
-                    placeholder="Keresés..."
-                  />
-                  <ul class="multiselect-options"></ul>
-                </div>
+        </div>
+        <div class="search_row">
+          <div
+            class="custom-multiselect"
+            id="ms_kategoria"
+            data-placeholder="Összes kategória"
+          >
+            <div class="multiselect-trigger" tabindex="0">
+              <div class="selected-tags">
+                <span class="placeholder">Összes kategória</span>
+              </div>
+              <span class="arrow">▼</span>
             </div>
+            <div class="multiselect-dropdown">
+              <input
+                type="text"
+                class="multiselect-search"
+                placeholder="Keresés..."
+              />
+              <ul class="multiselect-options"></ul>
+            </div>
+          </div>
 
-            <!-- Alapanyag szűrő -->
-            <div class="form-group">
-              <label>Alapanyag</label>
-              <div
-                class="custom-multiselect"
-                id="ms_alapanyag"
-                data-placeholder="Összes alapanyag"
-              >
-                <div class="multiselect-trigger" tabindex="0">
-                  <div class="selected-tags">
-                    <span class="placeholder">Összes alapanyag</span>
-                  </div>
-                  <span class="arrow">▼</span>
+          <!-- Alapanyag szűrő -->
+          <div class="form-group">
+            <label>Alapanyag</label>
+            <div
+              class="custom-multiselect"
+              id="ms_alapanyag"
+              data-placeholder="Összes alapanyag"
+            >
+              <div class="multiselect-trigger" tabindex="0">
+                <div class="selected-tags">
+                  <span class="placeholder">Összes alapanyag</span>
                 </div>
-                <div class="multiselect-dropdown">
-                  <input
-                    type="text"
-                    class="multiselect-search"
-                    placeholder="Keresés..."
-                  />
-                  <ul class="multiselect-options"></ul>
-                </div>
+                <span class="arrow">▼</span>
+              </div>
+              <div class="multiselect-dropdown">
+                <input
+                  type="text"
+                  class="multiselect-search"
+                  placeholder="Keresés..."
+                />
+                <ul class="multiselect-options"></ul>
               </div>
             </div>
           </div>
@@ -149,7 +144,6 @@
             console.log("A szerver elérhető!");
             const keresoJs = await import("./js/kereso.js");
             await keresoJs.loadKereso(); // Meghívjuk a default exportált függvényt
-            
           } else {
             console.log("A szerver nem válaszol.");
           }
