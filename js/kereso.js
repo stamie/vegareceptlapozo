@@ -29,26 +29,23 @@ async function loadKereso() {
   fetch("https://node-receptek.onrender.com/data/kategoriak")
     .then((response) => response.json())
     .then((data) => {
-      kategoriak = data.data;
+      const kategoriak_ = data.data;
       // Itt feltöltheted a kategória szűrőt a lekért adatokkal
-      szuroKategoria.innerHTML =
-        `<option value="">Összes kategória</option>` +
-        kategoriak
-          .map((k) => `<option value="${k.kod}">${k.nev}</option>`)
-          .join("");
+      kategoriak_.forEach(function (elem, index) {
+        kategoriak[index] = {'value': elem.kod, 'label': elem.nev};
+        
+      });
     })
     .catch((error) => console.error("Hiba a kategóriák betöltésekor:", error));
 
   fetch("https://node-receptek.onrender.com/data/alapanyagok")
     .then((response) => response.json())
     .then((data) => {
-      alapanyagok = data.data;
+      const alapanyagok_ = data.data;
       // Itt feltöltheted az alapanyag szűrőt a lekért adatokkal
-      szuroAlapanyag.innerHTML =
-        `<option value="">Összes alapanyag</option>` +
-        alapanyagok
-          .map((a) => `<option value="${a.kod}">${a.nev}</option>`)
-          .join("");
+      alapanyagok_.forEach(function (elem, index){
+        alapanyagok[index] = {'value': elem.kod, 'label': elem.nev};
+      });
     })
     .catch((error) =>
       console.error("Hiba az alapanyagok betöltésekor:", error),

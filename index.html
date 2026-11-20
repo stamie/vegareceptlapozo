@@ -13,11 +13,16 @@
       rel="stylesheet"
     />
     <!-- Alapértelmezett favicon a böngésző fülekhez -->
-    <link rel="icon" href="/img/favicon.ico" sizes="any">
+    <link rel="icon" href="/img/favicon.ico" sizes="any" />
     <!-- Modern PNG favicon (32x32 px) -->
-    <link rel="icon" href="/img/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link
+      rel="icon"
+      href="/img/favicon-32x32.png"
+      type="image/png"
+      sizes="32x32"
+    />
     <!-- Apple Touch Icon iOS eszközökhöz (Főképernyőre mentéskor) -->
-    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
 
     <link rel="stylesheet" href="./css/style-new.css" />
     <link rel="stylesheet" href="./css/modal.css" />
@@ -43,20 +48,56 @@
             />
           </div>
 
-          <!-- Kategória szűrő -->
-          <div class="form-group">
-            <label for="szuro_kategoria">Kategória</label>
-            <select id="szuro_kategoria">
-              <option value="">Összes kategória</option>
-            </select>
-          </div>
+          <div class="filters-container">
+            <!-- Kategória szűrő -->
+            <div class="form-group">
+              <label>Kategória</label>
+              <div
+                class="custom-multiselect"
+                id="ms_kategoria"
+                data-placeholder="Összes kategória"
+              >
+                <div class="multiselect-trigger" tabindex="0">
+                  <div class="selected-tags">
+                    <span class="placeholder">Összes kategória</span>
+                  </div>
+                  <span class="arrow">▼</span>
+                </div>
+                <div class="multiselect-dropdown">
+                  <input
+                    type="text"
+                    class="multiselect-search"
+                    placeholder="Keresés..."
+                  />
+                  <ul class="multiselect-options"></ul>
+                </div>
+              </div>
+            </div>
 
-          <!-- Alapanyag szűrő -->
-          <div class="form-group">
-            <label for="szuro_alapanyag">Alapanyag</label>
-            <select id="szuro_alapanyag">
-              <option value="">Összes alapanyag</option>
-            </select>
+            <!-- Alapanyag szűrő -->
+            <div class="form-group">
+              <label>Alapanyag</label>
+              <div
+                class="custom-multiselect"
+                id="ms_alapanyag"
+                data-placeholder="Összes alapanyag"
+              >
+                <div class="multiselect-trigger" tabindex="0">
+                  <div class="selected-tags">
+                    <span class="placeholder">Összes alapanyag</span>
+                  </div>
+                  <span class="arrow">▼</span>
+                </div>
+                <div class="multiselect-dropdown">
+                  <input
+                    type="text"
+                    class="multiselect-search"
+                    placeholder="Keresés..."
+                  />
+                  <ul class="multiselect-options"></ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -108,6 +149,7 @@
             console.log("A szerver elérhető!");
             const keresoJs = await import("./js/kereso.js");
             await keresoJs.loadKereso(); // Meghívjuk a default exportált függvényt
+            import("./js/multiselect.js");
           } else {
             console.log("A szerver nem válaszol.");
           }
