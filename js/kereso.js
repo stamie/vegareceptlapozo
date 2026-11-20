@@ -23,8 +23,8 @@ async function loadKereso() {
 
   // Eseményfigyelők a szűréshez
   keresoNev.addEventListener("input", filterRecipes);
-  szuroKategoria.addEventListener("change", filterRecipes);
-  szuroAlapanyag.addEventListener("change", filterRecipes);
+ // szuroKategoria.addEventListener("change", filterRecipes);
+ // szuroAlapanyag.addEventListener("change", filterRecipes);
 
   fetch("https://node-receptek.onrender.com/data/kategoriak")
     .then((response) => response.json())
