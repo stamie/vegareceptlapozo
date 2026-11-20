@@ -203,7 +203,7 @@ textarea:focus {
 
 .tag-category {
     background-color: #e7ede8;
-    color: #35523d;
+    color: #35523d !important;
     border-color: #c5d4c8;
 }
 
