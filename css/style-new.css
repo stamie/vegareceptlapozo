@@ -202,9 +202,9 @@ textarea:focus {
 }
 
 .tag-category {
-    background-color: #e7ede8;
+    background-color: #e7ede8 !important;
     color: #35523d !important;
-    border-color: #c5d4c8;
+    border-color: #c5d4c8 !important;
 }
 
 .recipe-source {
