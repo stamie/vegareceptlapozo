@@ -119,7 +119,7 @@ body {
     flex-direction: column;
     gap: 6px;
 }
-.form-group .w50 {
+.form-group.w50 {
     width: 50%;
 }
 
