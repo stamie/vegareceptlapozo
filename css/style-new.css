@@ -94,7 +94,6 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 16px;
-    width: 50%;
 }
 
 @media (max-width: 768px) {
@@ -119,6 +118,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 6px;
+}
+.form-group .w50 {
+    width: 50%;
 }
 
 label {
