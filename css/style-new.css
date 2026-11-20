@@ -94,6 +94,7 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 16px;
+    width: 50%;
 }
 
 @media (max-width: 768px) {
@@ -639,7 +640,7 @@ tbody tr:not(:last-child) {
 /* Fontos: belső keresőmező ne kapjon külső form-input keretet/árnyékot */
 .multiselect-dropdown .multiselect-search {
   display: block;
-  width: 50%;
+  width: 100%;
   max-width: 100%;
   box-sizing: border-box;
   padding: 9px 12px;
