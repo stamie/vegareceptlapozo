@@ -512,6 +512,7 @@ tbody tr:not(:last-child) {
     }
 }
 
+
 .filters-container {
   display: flex;
   gap: 20px;
@@ -531,7 +532,7 @@ tbody tr:not(:last-child) {
 .form-group > label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--text-color);
   margin-bottom: 6px;
 }
 
@@ -548,8 +549,8 @@ tbody tr:not(:last-child) {
   gap: 8px;
   min-height: 40px;
   padding: 6px 12px;
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   cursor: pointer;
   box-sizing: border-box;
@@ -557,12 +558,12 @@ tbody tr:not(:last-child) {
 }
 
 .multiselect-trigger:hover {
-  border-color: #9ca3af;
+  border-color: var(--primary);
 }
 
 .custom-multiselect.open .multiselect-trigger {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.18);
 }
 
 .selected-tags {
@@ -575,7 +576,7 @@ tbody tr:not(:last-child) {
 }
 
 .placeholder {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 
@@ -583,10 +584,10 @@ tbody tr:not(:last-child) {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: #eff6ff;
-  color: #1e40af;
-  border: 1px solid #bfdbfe;
-  padding: 2px 8px;
+  background-color: var(--subtle-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 2px 9px;
   border-radius: 999px;
   font-size: 0.82rem;
   font-weight: 500;
@@ -596,17 +597,18 @@ tbody tr:not(:last-child) {
 .tag-remove {
   cursor: pointer;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--primary);
   line-height: 1;
+  transition: color 0.15s;
 }
 
 .tag-remove:hover {
-  color: #1e3a8a;
+  color: var(--primary-hover);
 }
 
 .arrow {
   font-size: 0.7rem;
-  color: #6b7280;
+  color: var(--text-muted);
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
@@ -615,17 +617,16 @@ tbody tr:not(:last-child) {
   transform: rotate(180deg);
 }
 
-/* Lebegő lenyíló doboz (ne tolja arrébb az alatta lévő mezőket!) */
 .multiselect-dropdown {
   display: none;
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
   right: 0;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
-  box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 12px 24px -6px rgba(44, 53, 49, 0.14);
   z-index: 999;
   overflow: hidden;
   box-sizing: border-box;
@@ -635,21 +636,33 @@ tbody tr:not(:last-child) {
   display: block;
 }
 
-.multiselect-search {
+/* Fontos: belső keresőmező ne kapjon külső form-input keretet/árnyékot */
+.multiselect-dropdown .multiselect-search {
   display: block;
-  width: 100%;
+  width: 50%;
   max-width: 100%;
   box-sizing: border-box;
   padding: 9px 12px;
-  border: none;
-  border-bottom: 1px solid #e5e7eb;
+  margin: 0;
+  border: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   outline: none;
   font-size: 0.88rem;
-  color: #111827;
-  background: #fafafa;
+  color: var(--text-color);
+  background: var(--bg-color);
 }
 
-/* Felsoroláspontok és margók nullázása */
+.multiselect-dropdown .multiselect-search:focus {
+  box-shadow: none !important;
+  border-bottom-color: var(--primary) !important;
+}
+
+.multiselect-dropdown .multiselect-search::placeholder {
+  color: var(--text-muted);
+}
+
 .multiselect-options {
   list-style: none !important;
   margin: 0 !important;
@@ -667,15 +680,40 @@ tbody tr:not(:last-child) {
   border-radius: 7px;
   cursor: pointer;
   font-size: 0.88rem;
-  color: #374151;
+  color: var(--text-color);
+  transition: background-color 0.15s;
 }
 
 .multiselect-options li:hover {
-  background-color: #f3f4f6;
+  background-color: var(--subtle-bg);
 }
 
 .multiselect-options li.selected {
-  background-color: #eff6ff;
-  color: #1d4ed8;
-  font-weight: 500;
+  background-color: var(--subtle-bg);
+  color: var(--primary-hover);
+  font-weight: 600;
+}
+
+.checkbox-box {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--border-color);
+  background-color: var(--card-bg);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.multiselect-options li.selected .checkbox-box {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.multiselect-options li.selected .checkbox-box::after {
+  content: '✓';
+  color: var(--card-bg);
+  font-size: 11px;
+  font-weight: bold;
 }
