@@ -242,17 +242,19 @@ function filterRecipes() {
 
   const filteredRecipes = receptek.filter((recipe) => {
     const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
-    let matchesKategoria = false;
-    recipe.kategoriak.some((k) => {
-      katVal.forEach(function(elem) {
-        recipe.kategoriak.some((a) => {if (a.kod === elem) { matchesKategoria = true; return; }});
-      });        
-    });
-    console.log(matchesKategoria);
-    console.log(matchesNev);
-  /*  const matchesAlapanyag =
-      alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
-*/
+    let matchesKategoria = 0;
+    if (kategoriak.length > 0) {
+      recipe.kategoriak.some((k) => {
+        katVal.forEach(function (elem) {
+          recipe.kategoriak.some((a) => { if (a.kod === elem) { matchesKategoria++; } });
+        });
+      })
+    };
+    console.log(matchesKategoria == kategoriak.length);
+    console.log('matchesNev' + matchesNev);
+    /*  const matchesAlapanyag =
+        alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
+  */
     return matchesNev && matchesKategoria; // && matchesAlapanyag;
   });
 
