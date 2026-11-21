@@ -62,7 +62,7 @@ body {
 }
 .app-header-user .logo img {
     max-height: 250px;
-    padding-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .logo img {
