@@ -60,6 +60,9 @@ body {
 .app-header-user .logo {
     width: 50%;
 }
+.app-header-user .logo img {
+    max-height: 250px;
+}
 
 .logo img {
     max-height: 130px;
