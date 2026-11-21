@@ -249,7 +249,7 @@ function filterRecipes() {
           recipe.kategoriak.some((a) => {
             console.log(a);
             if (a.kod === elem) {
-              matchesKategoria++;
+              matchesKategoriak++;
    //           return;
             }
           });
