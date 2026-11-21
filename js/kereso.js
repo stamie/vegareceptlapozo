@@ -244,7 +244,7 @@ function filterRecipes() {
     let matchesKategoria = [];
     recipe.kategoriak.some((k) => {
       katVal.forEach(function(elem) {
-        matchesKategoria = matchesKategoria || recipe.kategoriak.some((a) => a.kod === elem);
+        matchesKategoria.join(recipe.kategoriak.some((a) => a.kod === elem));
       });        
     });
   /*  const matchesAlapanyag =
