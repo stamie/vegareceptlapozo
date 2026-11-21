@@ -92,11 +92,17 @@ body {
 
 .search-row {
     display: grid;
-    /*
-    grid-template-columns: 2fr 1fr 1fr;
-    */
     grid-auto-flow: column;
     gap: 16px;
+}
+
+.searc-row.c1 {
+    grid-template-columns: 1fr;
+
+}
+.searc-row.c2 {
+    grid-template-columns: 1fr 1fr;
+
 }
 
 @media (max-width: 768px) {
