@@ -188,6 +188,7 @@ async function loadKereso() {
     // Itt hívhatod meg a szűrő függvényedet!
     kategoriak = selected;
     filterRecipes();
+    console.log(kategoriak);
   });
 
   const alapanyagSelect = new CustomMultiSelect('ms_alapanyag', alapanyagok, (selected) => {
