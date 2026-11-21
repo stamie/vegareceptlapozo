@@ -240,31 +240,35 @@ function filterRecipes() {
   // Itt szűrheted a lekért tömbödet
   // Render függvény meghívása a megszűrt adatokra...
   let matchesKategoriak = 0;
+  let matchesAlapanyagok = 0;
   const filteredRecipes = receptek.filter((recipe) => {
     const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
-    
+
     if (kategoriak.length > 0) {
       katVal.forEach(function (elem) {
-          recipe.kategoriak.some((a) => {
-            console.log(a);
-            if (a.kod === elem) {
-              matchesKategoriak++;
-   //           return;
-            }
-          });
+        recipe.kategoriak.some((a) => {
+          console.log(a);
+          if (a.kod === elem) {
+            matchesKategoriak++;
+          }
         });
-      
+      });
     };
-
+    if (alapanyagok.length > 0) {
+      alapVal.forEach(function (elem) {
+        recipe.alapanyagok.some((a) => {
+          console.log(a);
+          if (a.kod === elem) {
+            matchesAlapanyagok++;
+          }
+        });
+      });
+    };
     const matchesKategoria = (matchesKategoriak === kategoriak.length);
-
-    console.log('matchesKategoria' + matchesKategoriak);
-    console.log('matchesNev' + matchesNev);
-    /*  const matchesAlapanyag =
-        alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
-  */
+    const matchesAlapanyag = (matchesAlapanyagok === alapanyagok.length);
     matchesKategoriak = 0;
-    return matchesNev && matchesKategoria; // && matchesAlapanyag;
+    matchesAlapanyagok = 0;
+    return matchesNev && matchesKategoria && matchesAlapanyag;
   });
 
   renderRecipes(filteredRecipes);
