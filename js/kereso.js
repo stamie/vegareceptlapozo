@@ -250,7 +250,9 @@ function filterRecipes() {
         });
       })
     };
+
     console.log(matchesKategoria >= kategoriak.length);
+    console.log('matchesKategoria' + matchesKategoria);
     console.log('matchesNev' + matchesNev);
     /*  const matchesAlapanyag =
         alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
