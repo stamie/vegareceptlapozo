@@ -257,7 +257,7 @@ function filterRecipes() {
     /*  const matchesAlapanyag =
         alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
   */
-    return matchesNev && (matchesKategoria == kategoriak.length); // && matchesAlapanyag;
+    return matchesNev && (matchesKategoria === kategoriak.length); // && matchesAlapanyag;
   });
 
   renderRecipes(filteredRecipes);
