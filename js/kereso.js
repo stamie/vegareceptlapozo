@@ -196,6 +196,7 @@ async function loadKereso() {
     // Itt hívhatod meg a szűrő függvényedet!
     alapanyagok = selected;
     filterRecipes();
+    console.log(alapanyagok)
   });
   let userToken = localStorage.getItem("token");
   let header = {
