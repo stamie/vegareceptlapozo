@@ -243,10 +243,9 @@ function filterRecipes() {
   const filteredRecipes = receptek.filter((recipe) => {
     const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
     let matchesKategoria = [];
-    recipe.kategoriak.some((k) => {
+    matchesKategoria = false || recipe.kategoriak.some((k) => {
       katVal.forEach(function(elem) {
-        matchesKategoria.join(recipe.kategoriak.some((a) => a.kod === elem));
-        console.log(matchesKategoria);
+        recipe.kategoriak.some((a) => {if (a.kod === elem) { return true; }});
       });        
     });
   /*  const matchesAlapanyag =
