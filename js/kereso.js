@@ -248,6 +248,7 @@ function filterRecipes() {
         recipe.kategoriak.some((a) => {if (a.kod === elem) { return true; }});
       });        
     });
+    console.log(matchesKategoria);
   /*  const matchesAlapanyag =
       alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
 */
