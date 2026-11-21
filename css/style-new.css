@@ -31,53 +31,58 @@ body {
 
 /* --- Fejléc és Logó --- */
 .app-header {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 16px 24px;
-  margin-bottom: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  flex-wrap: wrap;
-  gap: 16px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.app-header-user {
+    display: flex;
+    justify-content: space-around;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-color);
 }
 
 .logo img {
-  max-height: 130px;
-  width: auto;
-  display: block;
+    max-height: 130px;
+    width: auto;
+    display: block;
 }
 
 .main-nav {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .nav-link {
-  text-decoration: none;
-  color: var(--text-muted);
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--primary);
-  background-color: var(--subtle-bg);
+    color: var(--primary);
+    background-color: var(--subtle-bg);
 }
 
 /* Szűrő és Kereső Kártya */
@@ -100,6 +105,7 @@ body {
     grid-template-columns: 1fr;
 
 }
+
 .searc-row.c2 {
     grid-template-columns: 1fr 1fr;
 
@@ -109,14 +115,17 @@ body {
     .search-row {
         grid-template-columns: 1fr;
     }
+
     .app-header {
         flex-direction: column;
         align-items: stretch;
         text-align: center;
     }
+
     .logo {
         justify-content: center;
     }
+
     .main-nav {
         justify-content: center;
         flex-wrap: wrap;
@@ -128,6 +137,7 @@ body {
     flex-direction: column;
     gap: 6px;
 }
+
 .form-group.w50 {
     width: 50%;
 }
@@ -156,7 +166,8 @@ input[type="text"]:focus,
 select:focus,
 textarea:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.15); /* Lágyabb, természetes fókusz árnyék */
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.15);
+    /* Lágyabb, természetes fókusz árnyék */
 }
 
 /* Recept Kártyák Grid */
@@ -340,7 +351,8 @@ textarea:focus {
 }
 
 .btn-logout:hover {
-    background-color: #e3dec9; /* Enyhén sötétebb meleg árnyalat hoverre */
+    background-color: #e3dec9;
+    /* Enyhén sötétebb meleg árnyalat hoverre */
     color: var(--text-color);
 }
 
@@ -370,6 +382,7 @@ textarea:focus {
 .btn-new-recipe:active {
     transform: scale(0.98);
 }
+
 .btn-secondary {
     background-color: var(--subtle-bg);
     border: 1px solid var(--border-color);
@@ -389,13 +402,15 @@ textarea:focus {
 }
 
 .btn-secondary:hover {
-    background-color: #e3dec9; /* Enyhén sötétebb meleg árnyalat hover állapotra */
+    background-color: #e3dec9;
+    /* Enyhén sötétebb meleg árnyalat hover állapotra */
     color: var(--text-color);
 }
 
 .btn-secondary:active {
     transform: scale(0.98);
 }
+
 /* --- Form és Kártya stílusok a feltöltő oldalhoz --- */
 .form-container {
     max-width: 768px !important;
@@ -491,7 +506,8 @@ table {
     border: 1px solid var(--border-color);
 }
 
-th, td {
+th,
+td {
     padding: 10px 14px;
     text-align: left;
     font-size: 0.9rem;
@@ -519,6 +535,7 @@ tbody tr:not(:last-child) {
     .row {
         grid-template-columns: 1fr;
     }
+
     .form-container {
         padding: 20px;
     }
@@ -526,206 +543,206 @@ tbody tr:not(:last-child) {
 
 
 .filters-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  min-width: 240px;
-  flex: 1 1 260px;
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 240px;
+    flex: 1 1 260px;
+    position: relative;
 }
 
-.form-group > label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 6px;
+.form-group>label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 6px;
 }
 
 .custom-multiselect {
-  position: relative;
-  width: 100%;
-  user-select: none;
+    position: relative;
+    width: 100%;
+    user-select: none;
 }
 
 .multiselect-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  min-height: 40px;
-  padding: 6px 12px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  cursor: pointer;
-  box-sizing: border-box;
-  transition: border-color 0.15s, box-shadow 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 40px;
+    padding: 6px 12px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .multiselect-trigger:hover {
-  border-color: var(--primary);
+    border-color: var(--primary);
 }
 
 .custom-multiselect.open .multiselect-trigger {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.18);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.18);
 }
 
 .selected-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  flex: 1;
-  min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
 }
 
 .placeholder {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
 .tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background-color: var(--subtle-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  padding: 2px 9px;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  line-height: 1.3;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--subtle-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.3;
 }
 
 .tag-remove {
-  cursor: pointer;
-  font-weight: 700;
-  color: var(--primary);
-  line-height: 1;
-  transition: color 0.15s;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    transition: color 0.15s;
 }
 
 .tag-remove:hover {
-  color: var(--primary-hover);
+    color: var(--primary-hover);
 }
 
 .arrow {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
 }
 
 .custom-multiselect.open .arrow {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .multiselect-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  box-shadow: 0 12px 24px -6px rgba(44, 53, 49, 0.14);
-  z-index: 999;
-  overflow: hidden;
-  box-sizing: border-box;
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 12px 24px -6px rgba(44, 53, 49, 0.14);
+    z-index: 999;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .custom-multiselect.open .multiselect-dropdown {
-  display: block;
+    display: block;
 }
 
 /* Fontos: belső keresőmező ne kapjon külső form-input keretet/árnyékot */
 .multiselect-dropdown .multiselect-search {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  padding: 9px 12px;
-  margin: 0;
-  border: none !important;
-  border-bottom: 1px solid var(--border-color) !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  outline: none;
-  font-size: 0.88rem;
-  color: var(--text-color);
-  background: var(--bg-color);
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 9px 12px;
+    margin: 0;
+    border: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none;
+    font-size: 0.88rem;
+    color: var(--text-color);
+    background: var(--bg-color);
 }
 
 .multiselect-dropdown .multiselect-search:focus {
-  box-shadow: none !important;
-  border-bottom-color: var(--primary) !important;
+    box-shadow: none !important;
+    border-bottom-color: var(--primary) !important;
 }
 
 .multiselect-dropdown .multiselect-search::placeholder {
-  color: var(--text-muted);
+    color: var(--text-muted);
 }
 
 .multiselect-options {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 6px !important;
-  max-height: 210px;
-  overflow-y: auto;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 6px !important;
+    max-height: 210px;
+    overflow-y: auto;
 }
 
 .multiselect-options li {
-  list-style: none !important;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  border-radius: 7px;
-  cursor: pointer;
-  font-size: 0.88rem;
-  color: var(--text-color);
-  transition: background-color 0.15s;
+    list-style: none !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--text-color);
+    transition: background-color 0.15s;
 }
 
 .multiselect-options li:hover {
-  background-color: var(--subtle-bg);
+    background-color: var(--subtle-bg);
 }
 
 .multiselect-options li.selected {
-  background-color: var(--subtle-bg);
-  color: var(--primary-hover);
-  font-weight: 600;
+    background-color: var(--subtle-bg);
+    color: var(--primary-hover);
+    font-weight: 600;
 }
 
 .checkbox-box {
-  width: 16px;
-  height: 16px;
-  border: 1.5px solid var(--border-color);
-  background-color: var(--card-bg);
-  border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border-color);
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
 }
 
 .multiselect-options li.selected .checkbox-box {
-  background-color: var(--primary);
-  border-color: var(--primary);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 
 .multiselect-options li.selected .checkbox-box::after {
-  content: '✓';
-  color: var(--card-bg);
-  font-size: 11px;
-  font-weight: bold;
+    content: '✓';
+    color: var(--card-bg);
+    font-size: 11px;
+    font-weight: bold;
 }
