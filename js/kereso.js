@@ -242,8 +242,8 @@ function filterRecipes() {
 
   const filteredRecipes = receptek.filter((recipe) => {
     const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
-    let matchesKategoria = [];
-    matchesKategoria = false || recipe.kategoriak.some((k) => {
+    let matchesKategoria = false;
+    matchesKategoria = recipe.kategoriak.some((k) => {
       katVal.forEach(function(elem) {
         recipe.kategoriak.some((a) => {if (a.kod === elem) { return true; }});
       });        
