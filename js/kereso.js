@@ -14,6 +14,8 @@ const modalClose = document.getElementById("modalClose");
 let receptek = [];
 let kategoriak = [];
 let alapanyagok = [];
+let kategoriak_ = [];
+let alapanyagok_ = [];
 
 class CustomMultiSelect {
   constructor(elementId, options, onChangeCallback = null) {
@@ -186,17 +188,17 @@ async function loadKereso() {
   const kategoriaSelect = new CustomMultiSelect('ms_kategoria', kategoriak, (selected) => {
     console.log('Kiválasztott kategóriák:', selected);
     // Itt hívhatod meg a szűrő függvényedet!
-    kategoriak = selected;
+    kategoriak_ = selected;
     filterRecipes();
-    console.log(kategoriak);
+    console.log(kategoriak_);
   });
 
   const alapanyagSelect = new CustomMultiSelect('ms_alapanyag', alapanyagok, (selected) => {
     console.log('Kiválasztott alapanyagok:', selected);
     // Itt hívhatod meg a szűrő függvényedet!
-    alapanyagok = selected;
+    alapanyagok_ = selected;
     filterRecipes();
-    console.log(alapanyagok)
+    console.log(alapanyagok_)
   });
   let userToken = localStorage.getItem("token");
   let header = {
@@ -236,8 +238,8 @@ function openModal(recipeId) {
 
 function filterRecipes() {
   const nevVal = keresoNev.value.toLowerCase();
-  const katVal = kategoriak;
-  const alapVal = alapanyagok;
+  const katVal = kategoriak_;
+  const alapVal = alapanyagok_;
   // Itt szűrheted a lekért tömbödet
   // Render függvény meghívása a megszűrt adatokra...
   let matchesKategoriak = 0;
@@ -245,7 +247,7 @@ function filterRecipes() {
   const filteredRecipes = receptek.filter((recipe) => {
     const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
 
-    if (kategoriak.length > 0) {
+    if (kategoriak_.length > 0) {
       katVal.forEach(function (elem) {
         recipe.kategoriak.some((a) => {
           console.log(a);
@@ -255,7 +257,7 @@ function filterRecipes() {
         });
       });
     };
-    if (alapanyagok.length > 0) {
+    if (alapanyagok_.length > 0) {
       alapVal.forEach(function (elem) {
         recipe.alapanyagok.some((a) => {
           console.log(a);
@@ -265,8 +267,8 @@ function filterRecipes() {
         });
       });
     };
-    const matchesKategoria = (matchesKategoriak === kategoriak.length);
-    const matchesAlapanyag = (matchesAlapanyagok === alapanyagok.length);
+    const matchesKategoria = (matchesKategoriak === kategoriak_.length);
+    const matchesAlapanyag = (matchesAlapanyagok === alapanyagok_.length);
     matchesKategoriak = 0;
     matchesAlapanyagok = 0;
     return matchesNev && matchesKategoria && matchesAlapanyag;
