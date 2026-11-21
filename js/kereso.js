@@ -250,7 +250,7 @@ function filterRecipes() {
             console.log(a);
             if (a.kod === elem) {
               matchesKategoria++;
-              return;
+   //           return;
             }
           });
         });
