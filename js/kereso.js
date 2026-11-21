@@ -243,12 +243,13 @@ function filterRecipes() {
   const filteredRecipes = receptek.filter((recipe) => {
     const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
     let matchesKategoria = false;
-    matchesKategoria = recipe.kategoriak.some((k) => {
+    recipe.kategoriak.some((k) => {
       katVal.forEach(function(elem) {
-        recipe.kategoriak.some((a) => {if (a.kod === elem) { return true; }});
+        recipe.kategoriak.some((a) => {if (a.kod === elem) { matchesKategoria = true; return; }});
       });        
     });
     console.log(matchesKategoria);
+    console.log(matchesNev);
   /*  const matchesAlapanyag =
       alapVal === "" || recipe.alapanyagok.some((a) => a.kod === alapVal);
 */
