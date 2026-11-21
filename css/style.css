@@ -67,7 +67,7 @@ body {
 
 .logo img {
     max-height: 130px;
-    width: auto;
+    width: 100%;
     display: block;
 }
 
