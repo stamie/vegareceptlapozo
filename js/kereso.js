@@ -244,8 +244,7 @@ function filterRecipes() {
     const matchesNev = recipe.nev.toLowerCase().includes(nevVal);
     
     if (kategoriak.length > 0) {
-      recipe.kategoriak.some((k) => {
-        katVal.forEach(function (elem) {
+      katVal.forEach(function (elem) {
           recipe.kategoriak.some((a) => {
             console.log(a);
             if (a.kod === elem) {
@@ -254,7 +253,7 @@ function filterRecipes() {
             }
           });
         });
-      })
+      
     };
 
     const matchesKategoria = (matchesKategoriak === kategoriak.length);
