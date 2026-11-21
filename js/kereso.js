@@ -246,7 +246,13 @@ function filterRecipes() {
     if (kategoriak.length > 0) {
       recipe.kategoriak.some((k) => {
         katVal.forEach(function (elem) {
-          recipe.kategoriak.some((a) => { if (a.kod === elem) { matchesKategoria++; return;} });
+          recipe.kategoriak.some((a) => {
+            console.log(a);
+            if (a.kod === elem) {
+              matchesKategoria++;
+              return;
+            }
+          });
         });
       })
     };
